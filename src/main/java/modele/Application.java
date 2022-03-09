@@ -85,6 +85,31 @@ public class Application {
         this.lecteurs.put(lecteur, nLecteur);
     }
     
+    public Ouvrage nouvelExemplaire(IHM ihm)
+    {
+
+        String nISBN = ihm.saisirISBNexiste(this.getNumsISBN());  
+
+        Ouvrage O;
+        O=unOuvrage(nISBN);
+
+        IHM.InfosExemplaire infos= new ihm.InfosExemplaire();
+        infos=ihm.saisirExemplaire(LocalDate dateParution);
+
+        O.ajouterExemplaire(infos);
+        O.incrementNumDerEx();
+
+        Exemplaire e;
+        e= new Exemplaire(nISBN, infos.dateParution, infos.empruntable);
+
+        O.lierExemplaire;
+
+        ihm.informerUtilisateur("Création de l'exemplaire");
+
+        return Exemplaire;
+
+         }  
+    
     /**
      * @param args the command line arguments
      */
