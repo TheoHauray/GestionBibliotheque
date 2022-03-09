@@ -50,11 +50,16 @@ public class Application {
         Ouvrage ouvrage;
         ouvrage = new Ouvrage(nISBN,infos.titre,infos.dateParution, infos.nomEditeur,infos.auteurs,infos.publicVise);
         
-        this.ouvrages.put(ouvrage, nISBN);
+        
         
         ihm.informerUtilisateur("Création de l'ouvrage");
         
         return ouvrage;
+    }
+    
+    public void lierOuvrage(Ouvrage ouvrage, String nISBN)
+    {
+        this.ouvrages.put(ouvrage, nISBN);
     }
     
     /**
