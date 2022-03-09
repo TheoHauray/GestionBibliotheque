@@ -59,7 +59,7 @@ public class Application {
         return ouvrage;
     }
     
-        public Ouvrage nouveauLecteur(IHM ihm)
+    public Ouvrage nouveauLecteur(IHM ihm)
     {
         nLecteur = this.incrementerNumLecteur();
         
