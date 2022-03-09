@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package GestionBib.modele;
+package modele;
 
 import GestionBib.vue.IHM;
 import GestionBib.vue.IHM.InfosOuvrage;
@@ -44,7 +44,8 @@ public class Application {
     {
         
         String nISBN = ihm.saisirISBNnonExiste(this.getNumsISBN());
-        IHM.InfosOuvrage infos = ihm.saisirOuvrage();
+        IHM.InfosOuvrage infos = new IHM.InfosOuvrage();
+        infos ihm.saisirOuvrage();
         
         Ouvrage ouvrage;
         ouvrage = new Ouvrage(nISBN,infos.titre,infos.dateParution, infos.nomEditeur,infos.auteurs,infos.publicVise);

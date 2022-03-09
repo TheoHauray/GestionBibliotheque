@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package GestionBib.vue;
+package vue;
 import GestionBib.modele.PublicVise;
 import java.util.Date;
 import java.time.LocalDate;
@@ -141,14 +141,7 @@ public static class InfosExemplaire {
         this.empruntable = empruntable;
     }
 }
-
-
-
-
-
-
-
-    
+ 
 }
 
 
