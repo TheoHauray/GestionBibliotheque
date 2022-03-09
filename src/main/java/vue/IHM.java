@@ -20,7 +20,7 @@ public void afficher(String message){
     System.out.println(message);
 } 
 
-public void afficherLecteur(String nom, int numero, String prenom, Date dateDeNaissance, String adresse, String email ){
+public void afficherLecteur(String nom, String prenom, int numero, LocalDate dateDeNaissance, String adresse, String email){
     System.out.println("numero:"+numero+"\n Nom:"+nom+"\n  Prenom:"+prenom+" \n Date de Naissance"+dateDeNaissance+"\n  Adresse:"+adresse+"\n Email:"+email);
 }
 
@@ -36,7 +36,7 @@ public boolean existe(ArrayList<String> numsISBN, String numISBN){
   
     for (String s: numsISBN){
        
-        if (s==numISBN){
+        if (s.equals(numISBN)){
                return true;    
         }
     }
@@ -45,6 +45,16 @@ public boolean existe(ArrayList<String> numsISBN, String numISBN){
 
 //Utiliser sc.nextInt au lieu de sc.nextLine
 public String saisirISBNnonExiste(ArrayList<String> numsISBN){
+   String n = "";
+   while(n !="0" && existe(numsISBN,n)){
+        Scanner sc= new Scanner(System.in);
+        System.out.println("Entrez le Numéro ISBN:");
+        n = sc.nextLine();
+    } 
+   return n;
+}
+
+public String saisirISBNExiste(ArrayList<String> numsISBN){
    String n = "";
    while(n !="0" && !existe(numsISBN,n)){
         Scanner sc= new Scanner(System.in);
@@ -115,6 +125,48 @@ public InfosOuvrage saisirOuvrage()
     return infosOuvrage;
 }
 
+public InfosOuvrage saisirOuvrage(LocalDate dateParution)
+{
+    LocalDate dateReception;
+    boolean empruntable;
+    
+    ES.afficherTitre("Saisir les informations de l'exemplaire");
+    dateReception = ES.lireDate("- Date de réception");
+    
+    while(dateReception.isBefore(dateParution))
+    {
+        dateReception = ES.lireDate("-- La date de réception doit être postérieure à la date de parution.");
+    }
+    
+    empruntable = ES.lireBoolean("- L'exemplaire est-il empruntable ?");
+    InfosExemplaire infosExemplaire = new InfosExemplaire(dateReception, empruntable);
+    
+    return infosExemplaire;
+}
+
+public InfosLecteur saisirLecteur(int nLecteur)
+{
+    String nom, prenom, adresse, email;
+    LocalDate dateDeNaissance;
+
+    ES.afficherTitre("Saisir les informations du lecteur");
+    nom = ES.lireChaine("- Nom : ");
+    prenom = ES.lireChaine("- Prenom : ");
+    adresse = ES.lireChaine("- Adresse : ");
+    email = ES.lireEmail("- Email : ");
+    
+    dateDeNaissance = ES.lireDate("- Date de naissance : ");
+    
+    while(dateDeNaissance.isAfter(now()))
+    {
+        dateDeNaissance = ES.lireDate("-- La date de réception doit être antérieure à la date de parution.");
+    }
+    
+    InfosLecteur infosLecteur = new InfosLecteur(nom, prenom, dateDeNaissance, adresse, email);
+    
+    return infosLecteur;
+}
+
 public static class InfosOuvrage {
     public final String titre;
     public final LocalDate dateParution;
@@ -142,6 +194,22 @@ public static class InfosExemplaire {
     }
 }
  
+
+public static class InfosLecteur {
+    public final String nom;
+    public final String prenom;
+    public final LocalDate dateDeNaissance;
+    public final String adresse;
+    public final String email;
+     
+    public InfosLecteur(final String nom, final String prenom, final LocalDate dateDeNaissance, final String adresse, final String email){
+        this.nom = nom;
+        this.prenom = prenom;
+        this.dateDeNaissance = dateDeNaissance;
+        this.adresse = adresse;
+        this.email = email;
+    }
+}
 }
 
 

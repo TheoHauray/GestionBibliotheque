@@ -42,6 +42,21 @@ try {
 }
 }  // Fin lireChaine
 
+public static Boolean lireBoolean(String libelle){
+    
+    System.out.println(libelle);
+    String test = ES.afficherLibelle("Saisir 'o' pour oui, 'n' pour non");
+    
+    if(test = "o")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 /**
 * Affiche un libellé et permet la saisie d'une chaine.
 *
@@ -240,4 +255,4 @@ System.out.println(libelle);
 System.out.flush();
 }
 
-} // Fin de classe ES
+// Fin de classe ES
