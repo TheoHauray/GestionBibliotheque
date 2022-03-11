@@ -18,7 +18,7 @@ public class IHM {
     
 public void afficher(String message){
     System.out.println(message);
-} 
+}
 
 public void afficherLecteur(String nom, String prenom, int numero, LocalDate dateDeNaissance, String adresse, String email){
     System.out.println("numero:"+numero+"\n Nom:"+nom+"\n  Prenom:"+prenom+" \n Date de Naissance"+dateDeNaissance+"\n  Adresse:"+adresse+"\n Email:"+email);

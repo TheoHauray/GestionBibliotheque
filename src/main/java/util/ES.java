@@ -7,7 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import org.apache.commons.validator.routines.EmailValidator;
+//import org.apache.commons.validator.EmailValidator;
 
 /**
 * Classe de gestion de primitives d'EntréesSorties (affichages et saisies)
@@ -45,9 +45,9 @@ try {
 public static Boolean lireBoolean(String libelle){
     
     System.out.println(libelle);
-    String test = ES.afficherLibelle("Saisir 'o' pour oui, 'n' pour non");
+    String test = ES.lireChaine("Saisir 'o' pour oui, 'n' pour non");
     
-    if(test = "o")
+    if(test == "o")
     {
         return true;
     }
@@ -73,8 +73,7 @@ return lireChaine();
 public static String lireEmail() {
 boolean OK = false;
 String email = lireChaine();
-EmailValidator validator = EmailValidator.getInstance(false, false);        
-do { 
+/*do { 
 if (validator.isValid(email)){
     OK = true;   
 } 
@@ -82,7 +81,7 @@ else {
 System.out.println(" l'adresse mail n'est pas valide. Recommencez.");
 email = lireChaine();
 }   
-} while (!OK);
+} while (!OK); */
 return  email;
 }   // Fin lireEmail
 
@@ -254,5 +253,5 @@ public static void afficherLibelle(String libelle) {
 System.out.println(libelle);
 System.out.flush();
 }
-
+}
 // Fin de classe ES
