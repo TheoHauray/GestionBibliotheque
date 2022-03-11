@@ -23,8 +23,8 @@ public class Application {
     //Attributs
     //-----------------------------------------------
     private int numDerLecteur;
-    HashMap<Ouvrage, String> ouvrages = new HashMap<Ouvrage, String>();
-    HashMap<Lecteur, Integer> lecteurs = new HashMap<Lecteur, Integer>();
+    HashMap<String, Ouvrage> ouvrages = new HashMap<String, Ouvrage>();
+    HashMap<Integer, Lecteur> lecteurs = new HashMap<Integer, Lecteur>();
     
     //Méthodes
     //-----------------------------------------------
@@ -42,7 +42,7 @@ public class Application {
         return numsISBN;
     }
 
-    public Ouvrage nouvelOuvrage(IHM ihm)
+    public void nouvelOuvrage(IHM ihm)
     {
         
         String nISBN = ihm.saisirISBNnonExiste(this.getNumsISBN());
@@ -57,59 +57,63 @@ public class Application {
         ihm.afficher("Création de l'ouvrage");
         this.lierOuvrage(ouvrage, nISBN);
         
-        return ouvrage;
     }
     
-    public Ouvrage nouveauLecteur(IHM ihm)
+    public void nouveauLecteur(IHM ihm)
     {
-        nLecteur = this.incrementerNumLecteur();
+        int nLecteur = this.incrementerNumLecteur();
         
-        IHM.infosLecteur lecteur = new ihm.infosLecteur();
-        lecteur = ihm.saisirLecteur(nLecteur);
+        IHM.InfosLecteur infosLecteur;
+        infosLecteur = ihm.saisirLecteur(nLecteur);
         
         Lecteur lecteur;
-        lecteur = new Lecteur(nLecteur,infosLecteur.nom,infosLecteur.prenom,infosLecteur.age,infosLecteur.adresse,infosLecteur.email);
+        lecteur = new Lecteur(nLecteur,infosLecteur.nom,infosLecteur.prenom,infosLecteur.dateDeNaissance,infosLecteur.adresse,infosLecteur.email);
         
-        ihm.informerUtilisateur("Création de l'ouvrage");
+        ihm.afficher("Création de l'ouvrage");
         this.lierLecteur(lecteur,nLecteur);
         
-        return lecteur;
     }
     
     public void lierOuvrage(Ouvrage ouvrage, String nISBN)
     {
-        this.ouvrages.put(ouvrage, nISBN);
+        this.ouvrages.put(nISBN, ouvrage);
     }
     
     public void lierLecteur(Lecteur lecteur, int nLecteur)
     {
-        this.lecteurs.put(lecteur, nLecteur);
+        this.lecteurs.put(nLecteur, lecteur);
     }
     
-    public Ouvrage nouvelExemplaire(IHM ihm)
+    
+    public void nouvelExemplaire(IHM ihm)
     {
 
-        String nISBN = ihm.saisirISBNexiste(this.getNumsISBN());  
+        String nISBN = ihm.saisirISBNExiste(this.getNumsISBN());  
 
         Ouvrage O;
-        O=unOuvrage(nISBN);
+        O = unOuvrage(nISBN);
 
-        IHM.InfosExemplaire infos= new ihm.InfosExemplaire();
-        infos=ihm.saisirExemplaire(O.getDateParution());
+        IHM.InfosExemplaire infosExemplaire ;
+        infosExemplaire = ihm.saisirExemplaire(O.getDateParution());
 
-        O.ajouterExemplaire(infos);
+        O.ajouterExemplaire(infosExemplaire);
         O.incrementNumDerEx();
 
-        Exemplaire e;
-        e= new Exemplaire(nISBN, infos.dateParution, infos.empruntable);
+        ihm.afficher("Création de l'exemplaire");
+    }  
+    
+    public Ouvrage unOuvrage(String nISBN) {
 
-        O.lierExemplaire;
-
-        ihm.informerUtilisateur("Création de l'exemplaire");
-
-        return Exemplaire;
-
-         }  
+        Ouvrage O = ouvrages.get(nISBN);
+        return O;
+    } 
+    
+    public int incrementerNumLecteur()
+    {
+        this.numDerLecteur++;
+        
+        return this.numDerLecteur;
+    }
     
     /**
      * @param args the command line arguments

@@ -6,6 +6,7 @@ package modele;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.time.LocalDate;
+import vue.IHM.InfosExemplaire;
 
 /**
  *
@@ -72,5 +73,13 @@ public class Ouvrage implements Serializable{
     
     public void lierExemplaire(Exemplaire ex) {
         this.exemplaires.add(ex);
+    }
+    
+    public void ajouterExemplaire(InfosExemplaire infosExemplaire)
+    {
+        Exemplaire e;
+        e= new Exemplaire(this.getNumDerEx(), infosExemplaire.dateReception, infosExemplaire.empruntable);
+        
+        this.lierExemplaire(e);
     }
 }
