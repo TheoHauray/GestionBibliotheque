@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package vue;
-import GestionBib.modele.PublicVise;
+import modele.PublicVise;
 import java.util.Date;
 import java.time.LocalDate;
 import static java.time.LocalDate.now;
@@ -125,7 +125,7 @@ public InfosOuvrage saisirOuvrage()
     return infosOuvrage;
 }
 
-public InfosOuvrage saisirOuvrage(LocalDate dateParution)
+public InfosExemplaire saisirExemplaire(LocalDate dateParution)
 {
     LocalDate dateReception;
     boolean empruntable;

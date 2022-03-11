@@ -4,8 +4,9 @@
  */
 package modele;
 
-import GestionBib.vue.IHM;
-import GestionBib.vue.IHM.InfosOuvrage;
+import vue.IHM;
+import vue.IHM.InfosOuvrage;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -23,7 +24,7 @@ public class Application {
     //-----------------------------------------------
     private int numDerLecteur;
     HashMap<Ouvrage, String> ouvrages = new HashMap<Ouvrage, String>();
-    HashMap<Lecteur, int> lecteurs = new HashMap<Lecteur, int>();
+    HashMap<Lecteur, Integer> lecteurs = new HashMap<Lecteur, Integer>();
     
     //Méthodes
     //-----------------------------------------------
@@ -45,7 +46,7 @@ public class Application {
     {
         
         String nISBN = ihm.saisirISBNnonExiste(this.getNumsISBN());
-        IHM.InfosOuvrage infos = new IHM.InfosOuvrage();
+        IHM.InfosOuvrage infos;
         infos = ihm.saisirOuvrage();
         
         Ouvrage ouvrage;
@@ -53,7 +54,7 @@ public class Application {
         
         
         
-        ihm.informerUtilisateur("Création de l'ouvrage");
+        ihm.afficher("Création de l'ouvrage");
         this.lierOuvrage(ouvrage, nISBN);
         
         return ouvrage;
@@ -94,7 +95,7 @@ public class Application {
         O=unOuvrage(nISBN);
 
         IHM.InfosExemplaire infos= new ihm.InfosExemplaire();
-        infos=ihm.saisirExemplaire(LocalDate dateParution);
+        infos=ihm.saisirExemplaire(O.getDateParution());
 
         O.ajouterExemplaire(infos);
         O.incrementNumDerEx();
