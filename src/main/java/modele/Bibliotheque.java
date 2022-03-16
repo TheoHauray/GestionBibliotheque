@@ -4,6 +4,7 @@
  */
 package modele;
 
+import java.io.Serializable;
 import vue.IHM;
 import vue.IHM.InfosOuvrage;
 import java.time.LocalDate;
@@ -18,8 +19,9 @@ import java.util.Set;
  *
  * @author krebst
  */
-public class Bibliotheque {
+public class Bibliotheque implements Serializable {
     
+    private static final long serialVersionUID = 1L;
     //Attributs
     //-----------------------------------------------
     private int numDerLecteur;

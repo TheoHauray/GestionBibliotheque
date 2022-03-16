@@ -19,7 +19,7 @@ public static void main(String[] args) {
         System.err.flush();
         System.exit(Main.EXIT_ERR_LOAD);
     }
-
+    
     IHM ihm = new IHM(bibliotheque);
 
     ihm.afficherInterface();

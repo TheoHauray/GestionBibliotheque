@@ -9,13 +9,73 @@ import java.time.LocalDate;
 import static java.time.LocalDate.now;
 import java.util.Scanner;
 import java.util.ArrayList;
+import modele.Bibliotheque;
 import util.ES;
+import util.Commande;
 /**
  *
  * @author jaghdamm
  */
 public class IHM {
     
+    
+private final Bibliotheque bibliotheque;
+
+public IHM(Bibliotheque bibliotheque) {
+    this.bibliotheque = bibliotheque;
+}
+
+//-----  affichage menu et saisie des commandes par l'utilisateur  -------------------------------------------------
+
+/**
+* afficherInterface permet l'affichage du menu et le choix d'une commande
+*par l'utilisateur (dialogueSaisirCommande) puis l'invocation de la méthode
+*de la classe Bibliotheque réalisant l'action  (gererDialogue)
+*/
+
+public void afficherInterface() {
+    Commande cmd;
+    do {
+        cmd = this.dialogueSaisirCommande();
+        this.gererDialogue(cmd);
+    } while (cmd != Commande.QUITTER);
+}
+
+private Commande dialogueSaisirCommande() {
+    ES.afficherTitre("===== Bibliotheque =====");
+    ES.afficherLibelle(Commande.synopsisCommandes());
+    ES.afficherLibelle("===============================================");
+    ES.afficherLibelle("Saisir l'identifiant de l'action choisie :");
+    return Commande.lireCommande();
+}
+
+private void gererDialogue(Commande cmd) {
+    switch (cmd) {
+        case QUITTER:
+            break;
+        case CREER_LECTEUR:
+            bibliotheque.nouveauLecteur(this);
+            break;
+        case CONSULTER_LECTEURS:
+            bibliotheque.consulterLecteur(this);
+            break;
+        case CREER_OUVRAGE:
+            bibliotheque.nouvelOuvrage(this);
+            break;
+        case AFFICHER_OUVRAGE:
+            bibliotheque.consulterOuvrage(this);
+            break;
+        case CREER_EXEMPLAIRE:
+            bibliotheque.nouvelExemplaire(this);
+            break;
+        case AFFICHER_EXEMPLAIRE:
+            bibliotheque.consulterExemplaireOuvrage(this);
+            break;
+        default:
+            assert false : "Commande inconnue.";
+    }
+}
+
 public void afficher(String message){
     System.out.println(message);
 }
