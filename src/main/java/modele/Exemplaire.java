@@ -23,15 +23,15 @@ public class Exemplaire implements Serializable {
         this.empruntable = empruntable;
     }
 
-    public int getnumero(){
+    public int getNumero(){
     return numero;
     }
     
-    public LocalDate getdateDeReception(){
+    public LocalDate getDateDeReception(){
         return dateDeReception;
     }
     
-    public boolean getempruntable(){
+    public boolean getEmpruntable(){
         return empruntable;
     }
     

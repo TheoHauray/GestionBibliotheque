@@ -12,7 +12,7 @@ import java.time.LocalDate;
  */
 public class Lecteur implements Serializable{
     private static final long serialVersionUID = 1L;
-    private int numero;
+    private int nLecteur;
     private String nom;
     private String prenom;
     private LocalDate dateDeNaissance;
@@ -21,7 +21,7 @@ public class Lecteur implements Serializable{
     
     Lecteur(int numero,String nom,String prenom,LocalDate dateDeNaissance,String adresse,String email)
     {
-        this.numero = numero;
+        this.nLecteur = numero;
         this.nom = nom;
         this.prenom = prenom;
         this.dateDeNaissance = dateDeNaissance;
@@ -29,22 +29,22 @@ public class Lecteur implements Serializable{
         this.email = email;
     }
     
-    public int getnumero(){
-        return numero;
+    public int getNumero(){
+        return nLecteur;
     }
-      public String getnom(){
+      public String getNom(){
         return nom;
     }
-      public String getprenom(){
+      public String getPrenom(){
         return prenom;
     }
-      public LocalDate getdateDeNaissance(){
+      public LocalDate getDateDeNaissance(){
         return dateDeNaissance;
     }
-      public String getadresse(){
+      public String getAdresse(){
         return adresse;
     }
-      public String getemail(){
+      public String getEmail(){
         return email;
     }
     

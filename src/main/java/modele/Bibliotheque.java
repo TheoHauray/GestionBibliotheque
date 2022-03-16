@@ -41,6 +41,19 @@ public class Bibliotheque {
         
         return numsISBN;
     }
+    
+    public ArrayList<Integer> getNumsLecteurs()
+    {
+        ArrayList<Integer> numsLecteurs = new ArrayList<Integer>();
+        Set keys = this.lecteurs.keySet();
+        Iterator<Lecteur> iterator = keys.iterator();
+        
+        while(iterator.hasNext()){
+            numsLecteurs.add(iterator.next().getNumero());
+        }
+        
+        return numsLecteurs;
+    }
 
     public void nouvelOuvrage(IHM ihm)
     {
@@ -51,8 +64,6 @@ public class Bibliotheque {
         
         Ouvrage ouvrage;
         ouvrage = new Ouvrage(nISBN,infos.titre,infos.dateParution, infos.nomEditeur,infos.auteurs,infos.publicVise);
-        
-        
         
         ihm.afficher("Création de l'ouvrage");
         this.lierOuvrage(ouvrage, nISBN);
@@ -69,9 +80,37 @@ public class Bibliotheque {
         Lecteur lecteur;
         lecteur = new Lecteur(nLecteur,infosLecteur.nom,infosLecteur.prenom,infosLecteur.dateDeNaissance,infosLecteur.adresse,infosLecteur.email);
         
-        ihm.afficher("Création de l'ouvrage");
+        ihm.afficher("Création de lecteur");
         this.lierLecteur(lecteur,nLecteur);
+    }
+    
+    public void consulterLecteur(IHM ihm)
+    {
+        int nLecteur = ihm.saisirLecteurExiste(numDerLecteur);
         
+        Lecteur l = lecteurs.get(nLecteur);
+        ihm.afficherLecteur(l.getNom(), l.getPrenom(), nLecteur, l.getDateDeNaissance(), l.getAdresse(), l.getEmail());
+    }
+    
+    public void consulterOuvrage(IHM ihm)
+    {
+        String nISBN = ihm.saisirISBNExiste(this.getNumsISBN());
+        
+        Ouvrage o = ouvrages.get(nISBN);
+        ihm.afficheOuvrage(o.getISBN(), o.getTitre(), o.getAuteurs(), o.getNomEditeur(), o.getDateParution());
+    }
+    
+    public void consulterExemplaireOuvrage(IHM ihm)
+    {
+        String nISBN = ihm.saisirISBNExiste(this.getNumsISBN());
+        
+        Ouvrage o = ouvrages.get(nISBN);
+        ihm.afficheOuvrage(o.getISBN(), o.getTitre(), o.getAuteurs(), o.getNomEditeur(), o.getDateParution());
+        
+        for(Exemplaire e : o.getExemplaires())
+        {
+            ihm.afficherExemplaire(e.getNumero(), e.getDateDeReception(), e.getEmpruntable());
+        }
     }
     
     public void lierOuvrage(Ouvrage ouvrage, String nISBN)
@@ -104,10 +143,16 @@ public class Bibliotheque {
     
     public Ouvrage unOuvrage(String nISBN) {
 
-        Ouvrage O = ouvrages.get(nISBN);
-        return O;
+        Ouvrage o = ouvrages.get(nISBN);
+        return o;
     } 
     
+    public Lecteur unLecteur(int nLecteur)
+    {
+        Lecteur l = lecteurs.get(nLecteur);
+        return l;
+    }
+            
     public int incrementerNumLecteur()
     {
         this.numDerLecteur++;
