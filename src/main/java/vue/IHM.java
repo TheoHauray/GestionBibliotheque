@@ -21,18 +21,29 @@ public void afficher(String message){
 }
 
 public void afficherLecteur(String nom, String prenom, int numero, LocalDate dateDeNaissance, String adresse, String email){
-    System.out.println("numero:"+numero+"\n Nom:"+nom+"\n  Prenom:"+prenom+" \n Date de Naissance"+dateDeNaissance+"\n  Adresse:"+adresse+"\n Email:"+email);
+    ES.afficherNom(nom);
+    ES.afficherPrenom(prenom);
+    ES.afficherNumero(numero);
+    ES.afficherDate(dateDeNaissance);
+    ES.afficherAddresse(adresse);
+    ES.afficherEmail(email);
 }
 
-public void afficherExemplaire(int numero, Date dateDeReception, boolean empruntable){
-    System.out.println("numero:"+numero+" \n Date de reception:"+ dateDeReception+ " \n empruntable ?"+empruntable);
+public void afficherExemplaire(int numero, LocalDate dateDeReception, boolean empruntable){
+    ES.afficherNumero(numero);
+    ES.afficherDate(dateDeReception);
+    ES.afficherBool(empruntable);
 }
 
-public void afficheOuvrage(String nISBN, String titre, String nomAuteurs, String nomEditeur, Date dateParution){
-    System.out.println("Numero ISBN:"+nISBN+"\n  Titre:"+titre+" \n Auteurs:"+nomAuteurs+" \n Editeur:"+nomEditeur+" \n Date de parution:"+dateParution);
+public void afficheOuvrage(String nISBN, String titre, ArrayList<String> nomAuteurs, String nomEditeur, LocalDate dateParution){
+    ES.afficherISBN(nISBN);
+    ES.afficherTitre(titre);
+    ES.afficherAuteurs(nomAuteurs);
+    ES.afficherEditeur(nomEditeur);
+    ES.afficherDate(dateParution);
 } 
 
-public boolean existe(ArrayList<String> numsISBN, String numISBN){
+public boolean existeISBN(ArrayList<String> numsISBN, String numISBN){
   
     for (String s: numsISBN){
        
@@ -43,10 +54,21 @@ public boolean existe(ArrayList<String> numsISBN, String numISBN){
     return false;
 }
 
+public boolean existeLecteur(ArrayList<Integer> numsLecteur, int numLecteur){
+  
+    for (int s: numsLecteur){
+       
+        if (s == numLecteur){
+               return true;    
+        }
+    }
+    return false;
+}
+
 //Utiliser sc.nextInt au lieu de sc.nextLine
 public String saisirISBNnonExiste(ArrayList<String> numsISBN){
    String n = "";
-   while(n !="0" && existe(numsISBN,n)){
+   while(n !="0" && existeISBN(numsISBN,n)){
         Scanner sc= new Scanner(System.in);
         System.out.println("Entrez le Numéro ISBN:");
         n = sc.nextLine();
@@ -56,10 +78,20 @@ public String saisirISBNnonExiste(ArrayList<String> numsISBN){
 
 public String saisirISBNExiste(ArrayList<String> numsISBN){
    String n = "";
-   while(n !="0" && !existe(numsISBN,n)){
+   while(n !="0" && !existeISBN(numsISBN,n)){
         Scanner sc= new Scanner(System.in);
         System.out.println("Entrez le Numéro ISBN:");
         n = sc.nextLine();
+    } 
+   return n;
+}
+
+public int saisirLecteurExiste(ArrayList<Integer> numsLecteur){
+   int n = 0;
+   while(n !=0 && !existeLecteur(numsLecteur,n)){
+        Scanner sc= new Scanner(System.in);
+        System.out.println("Entrez le Numéro de Lecteur:");
+        n = sc.nextInt();
     } 
    return n;
 }

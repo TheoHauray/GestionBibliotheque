@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 //import org.apache.commons.validator.EmailValidator;
 
 /**
@@ -236,12 +237,28 @@ return dateCourante.getMonthValue();
 *
 * @param titre titre à afficher
 */
+
+
+public static void afficherTexte(String texte) {
+System.out.println();
+System.out.println(texte);
+System.out.flush();
+}
+
+
 public static void afficherTitre(String titre) {
 System.out.println();
 System.out.println(titre);
 System.out.println();
 System.out.flush();
 }
+
+public static void afficherDate(LocalDate date) {
+System.out.println();
+System.out.println(date);
+System.out.flush();
+}
+
 
 /**
 * Affichage d'un message. On revient à la ligne après le message.
@@ -253,5 +270,65 @@ public static void afficherLibelle(String libelle) {
 System.out.println(libelle);
 System.out.flush();
 }
+
+
+
+public static void afficherNom(String nom) {
+System.out.println(nom);
+System.out.flush();
+}
+
+
+public static void afficherPrenom(String prenom) {
+    
+    System.out.println(prenom);
+    System.out.flush();
+}
+
+public static void afficherNumero(int n) {
+    
+    System.out.println(n);
+    System.out.flush();
+}
+
+
+public static void afficherAuteurs(ArrayList<String> nomAuteurs) {
+    for (String s: nomAuteurs) {
+        System.out.println(s);
+        System.out.flush();
+    }
+
+}
+
+public static void afficherAddresse(String addresse) {
+System.out.println(addresse);
+System.out.flush();
+}
+
+public static void afficherEmail(String email) {
+System.out.println(email);
+System.out.flush();
+}
+
+public static void afficherISBN(String nISBN) {
+System.out.println(nISBN);
+System.out.flush();
+}
+
+public static void afficherEditeur(String editeur) {
+System.out.println(editeur);
+System.out.flush();
+}
+
+public static void afficherDateDeNaissance(String dateDeNaissance) {
+System.out.println(dateDeNaissance);
+System.out.flush();
+}
+
+public static void afficherBool(boolean b) {
+System.out.println(b);
+System.out.flush();
+}
+
 }
 // Fin de classe ES

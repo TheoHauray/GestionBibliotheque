@@ -86,7 +86,7 @@ public class Bibliotheque {
     
     public void consulterLecteur(IHM ihm)
     {
-        int nLecteur = ihm.saisirLecteurExiste(numDerLecteur);
+        int nLecteur = ihm.saisirLecteurExiste(this.getNumsLecteurs());
         
         Lecteur l = lecteurs.get(nLecteur);
         ihm.afficherLecteur(l.getNom(), l.getPrenom(), nLecteur, l.getDateDeNaissance(), l.getAdresse(), l.getEmail());
