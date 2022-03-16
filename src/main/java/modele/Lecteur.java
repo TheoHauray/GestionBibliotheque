@@ -19,7 +19,7 @@ public class Lecteur implements Serializable{
     private String adresse;
     private String email;
     
-    Lecteur(int numero,String nom,String prenom,LocalDate dateDeNaissance,String adresse,String email)
+    public Lecteur(int numero,String nom,String prenom,LocalDate dateDeNaissance,String adresse,String email)
     {
         this.nLecteur = numero;
         this.nom = nom;

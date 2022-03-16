@@ -17,7 +17,7 @@ public class Exemplaire implements Serializable {
     private LocalDate dateDeReception;
     private boolean empruntable;
     
-    Exemplaire (int numero, LocalDate dateDeReception,boolean empruntable ) {
+    public Exemplaire (int numero, LocalDate dateDeReception,boolean empruntable ) {
         this.numero = numero;
         this.dateDeReception = dateDeReception;
         this.empruntable = empruntable;

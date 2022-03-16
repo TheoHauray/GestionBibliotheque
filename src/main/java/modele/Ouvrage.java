@@ -27,7 +27,7 @@ public class Ouvrage implements Serializable{
     
     //Constructeur
     //-----------------------------------------------
-    Ouvrage(String nISBN,String titre,LocalDate dateParution,String nomEditeur,ArrayList<String> auteurs,PublicVise publicVise)
+    public Ouvrage(String nISBN,String titre,LocalDate dateParution,String nomEditeur,ArrayList<String> auteurs,PublicVise publicVise)
     {
         this.nISBN = nISBN;
         this.titre = titre;

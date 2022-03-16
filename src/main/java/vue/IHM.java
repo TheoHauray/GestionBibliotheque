@@ -21,7 +21,8 @@ public class IHM {
     
 private final Bibliotheque bibliotheque;
 
-public IHM(Bibliotheque bibliotheque) {
+public IHM(Bibliotheque bibliotheque) 
+{
     this.bibliotheque = bibliotheque;
 }
 

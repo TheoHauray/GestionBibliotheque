@@ -28,6 +28,14 @@ public class Bibliotheque implements Serializable {
     HashMap<String, Ouvrage> ouvrages = new HashMap<String, Ouvrage>();
     HashMap<Integer, Lecteur> lecteurs = new HashMap<Integer, Lecteur>();
     
+    //Constructeur
+    //-----------------------------------------------
+    public Bibliotheque()
+    {
+        this.numDerLecteur = 1;
+        ouvrages = new HashMap<String, Ouvrage>();
+        lecteurs = new HashMap<Integer, Lecteur>();
+    }
     //Méthodes
     //-----------------------------------------------
     
