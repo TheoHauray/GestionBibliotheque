@@ -18,7 +18,7 @@ import java.util.Set;
  *
  * @author krebst
  */
-public class Application {
+public class Bibliotheque {
     
     //Attributs
     //-----------------------------------------------

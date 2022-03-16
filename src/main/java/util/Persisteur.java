@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-
 /**
 * La classe Persisteur est responsable de l'enregistrement et de la
 * restauration de l'état du modèle.

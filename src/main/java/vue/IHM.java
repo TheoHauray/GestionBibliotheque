@@ -194,7 +194,6 @@ public static class InfosExemplaire {
     }
 }
  
-
 public static class InfosLecteur {
     public final String nom;
     public final String prenom;
