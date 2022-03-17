@@ -32,7 +32,7 @@ public class Bibliotheque implements Serializable {
     //-----------------------------------------------
     public Bibliotheque()
     {
-        this.numDerLecteur = 1;
+        this.numDerLecteur = 0;
         ouvrages = new HashMap<String, Ouvrage>();
         lecteurs = new HashMap<Integer, Lecteur>();
     }

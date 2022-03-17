@@ -20,8 +20,6 @@ public class Test_it1 {
      */
     public static void main(String[] args) {
     Bibliotheque bibliotheque = new Bibliotheque();
-    IHM ihm = new IHM(bibliotheque);
-    ihm.afficherInterface();
 
     try {
         bibliotheque = Persisteur.lireEtat();
@@ -30,6 +28,9 @@ public class Test_it1 {
         System.err.flush();
         System.exit(Main.EXIT_ERR_LOAD);
     }
+    
+    IHM ihm = new IHM(bibliotheque);
+    ihm.afficherInterface();
 
     try {
         Persisteur.sauverEtat(bibliotheque);
