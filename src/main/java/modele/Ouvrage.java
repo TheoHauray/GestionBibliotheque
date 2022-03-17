@@ -36,6 +36,7 @@ public class Ouvrage implements Serializable{
         this.auteurs = auteurs;
         this.publicVise = publicVise;
         this.numDerEx = 0;
+        this.exemplaires = new ArrayList<Exemplaire>();
     }
     
     public String getISBN() {

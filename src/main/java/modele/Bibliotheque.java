@@ -53,13 +53,11 @@ public class Bibliotheque implements Serializable {
     public ArrayList<Integer> getNumsLecteurs()
     {
         ArrayList<Integer> numsLecteurs = new ArrayList<Integer>();
-        Set keys = this.lecteurs.keySet();
-        Iterator<Lecteur> iterator = keys.iterator();
         
-        while(iterator.hasNext()){
-            numsLecteurs.add(iterator.next().getNumero());
-        }
-        
+        this.lecteurs.forEach(
+            (key, value)
+                -> numsLecteurs.add(key));
+
         return numsLecteurs;
     }
 
