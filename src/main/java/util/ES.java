@@ -219,7 +219,7 @@ LocalDate dateCourante = LocalDate.now ();
 return dateCourante.getYear();
 }
 
-/**
+/**O.incrementNumDerEx();
 * @return un entier représentant le mois courant.
 */
 private static int moisCourant() {

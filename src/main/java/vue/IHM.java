@@ -227,9 +227,9 @@ public InfosExemplaire saisirExemplaire(LocalDate dateParution)
     ES.afficherTitre("Saisir les informations de l'exemplaire");
     dateReception = ES.lireDate("- Date de réception");
     
-    while(dateReception.isBefore(dateParution) && dateReception.isAfter(now()))
+    while(dateReception.isBefore(dateParution) || dateReception.isAfter(now()))
     {
-        dateReception = ES.lireDate("-- La date de réception doit être postérieure à la date de parution.");
+        dateReception = ES.lireDate("-- La date de réception doit être postérieure à la date de parution.\n Veuillez entrer une nouvelle date");
     }
     
     empruntable = ES.lireBoolean("- L'exemplaire est-il empruntable ?");
@@ -253,7 +253,7 @@ public InfosLecteur saisirLecteur(int nLecteur)
     
     while(dateDeNaissance.isAfter(now()))
     {
-        dateDeNaissance = ES.lireDate("-- La date de réception doit être antérieure à la date de parution.");
+        dateDeNaissance = ES.lireDate("-- La date de naissance doit être antérieure à la date du jour.");
     }
     
     InfosLecteur infosLecteur = new InfosLecteur(nom, prenom, dateDeNaissance, adresse, email);
