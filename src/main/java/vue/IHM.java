@@ -128,10 +128,11 @@ public boolean existeLecteur(ArrayList<Integer> numsLecteur, int numLecteur){
 
 //Utiliser sc.nextInt au lieu de sc.nextLine
 public String saisirISBNnonExiste(ArrayList<String> numsISBN){
-   String n = "";
-   while(n !="0" && existeISBN(numsISBN,n)){
-        Scanner sc= new Scanner(System.in);
-        System.out.println("Entrez le Numéro ISBN:");
+    System.out.println("Entrez le Numéro ISBN:");
+    Scanner sc= new Scanner(System.in);
+    String n = sc.nextLine();
+    while(n !="0" && existeISBN(numsISBN,n)){
+        System.out.println("Le n° existe déjà, entrez un nouveau numéro ISBN:");
         n = sc.nextLine();
     } 
    return n;
