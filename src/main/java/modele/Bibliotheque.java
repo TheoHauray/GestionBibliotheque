@@ -42,13 +42,11 @@ public class Bibliotheque implements Serializable {
     public ArrayList<String> getNumsISBN()
     {
         ArrayList<String> numsISBN = new ArrayList<String>();
-        Set keys = this.ouvrages.keySet();
-        Iterator<Ouvrage> iterator = keys.iterator();
         
-        while(iterator.hasNext()){
-            numsISBN.add(iterator.next().getISBN());
-        }
-        
+        this.ouvrages.forEach(
+            (key, value)
+                -> numsISBN.add(key));
+
         return numsISBN;
     }
     
