@@ -274,59 +274,66 @@ System.out.flush();
 
 
 public static void afficherNom(String nom) {
-System.out.println(nom);
+System.out.println("Nom : "+nom);
 System.out.flush();
 }
 
 
 public static void afficherPrenom(String prenom) {
     
-    System.out.println(prenom);
+    System.out.println("Prénom : "+prenom);
     System.out.flush();
 }
 
 public static void afficherNumero(int n) {
     
-    System.out.println(n);
+    System.out.println("Numéro : "+n);
     System.out.flush();
 }
 
 
 public static void afficherAuteurs(ArrayList<String> nomAuteurs) {
     for (String s: nomAuteurs) {
-        System.out.println(s);
+        System.out.println("Auteur : "+s);
         System.out.flush();
     }
 
 }
 
 public static void afficherAddresse(String addresse) {
-System.out.println(addresse);
+System.out.println("Adresse : "+addresse);
 System.out.flush();
 }
 
 public static void afficherEmail(String email) {
-System.out.println(email);
+System.out.println("Adresse email : "+email);
 System.out.flush();
 }
 
 public static void afficherISBN(String nISBN) {
-System.out.println(nISBN);
+System.out.println("Numéro ISBN : "+nISBN);
 System.out.flush();
 }
 
 public static void afficherEditeur(String editeur) {
-System.out.println(editeur);
+System.out.println("Editeur : "+editeur);
 System.out.flush();
 }
 
 public static void afficherDateDeNaissance(String dateDeNaissance) {
-System.out.println(dateDeNaissance);
+System.out.println("Date de naissance (aaaa-mm-jj) : "+dateDeNaissance);
 System.out.flush();
 }
 
 public static void afficherBool(boolean b) {
-System.out.println(b);
+    if(b == true)
+    {
+        System.out.println("Vrai");
+    }
+    else
+    {
+        System.out.println("Faux");
+    }
 System.out.flush();
 }
 

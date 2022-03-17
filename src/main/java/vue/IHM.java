@@ -149,7 +149,7 @@ public String saisirISBNExiste(ArrayList<String> numsISBN){
 }
 
 public int saisirLecteurExiste(ArrayList<Integer> numsLecteur){
-   int n = 0;
+   int n = -1;
    while(n !=0 && !existeLecteur(numsLecteur,n)){
         Scanner sc= new Scanner(System.in);
         System.out.println("Entrez le Numéro de Lecteur:");
@@ -227,7 +227,7 @@ public InfosExemplaire saisirExemplaire(LocalDate dateParution)
     ES.afficherTitre("Saisir les informations de l'exemplaire");
     dateReception = ES.lireDate("- Date de réception");
     
-    while(dateReception.isBefore(dateParution))
+    while(dateReception.isBefore(dateParution) && dateReception.isAfter(now()))
     {
         dateReception = ES.lireDate("-- La date de réception doit être postérieure à la date de parution.");
     }
