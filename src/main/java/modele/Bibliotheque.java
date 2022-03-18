@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import util.ES;
 
 /**
  *
@@ -63,59 +64,81 @@ public class Bibliotheque implements Serializable {
 
     public void nouvelOuvrage(IHM ihm)
     {
-        
         String nISBN = ihm.saisirISBNnonExiste(this.getNumsISBN());
-        IHM.InfosOuvrage infos;
-        infos = ihm.saisirOuvrage();
+        IHM.InfosOuvrage infos = ihm.saisirOuvrage();
         
-        Ouvrage ouvrage;
-        ouvrage = new Ouvrage(nISBN,infos.titre,infos.dateParution, infos.nomEditeur,infos.auteurs,infos.publicVise);
-        
-        ihm.afficher("Création de l'ouvrage");
+        Ouvrage ouvrage = new Ouvrage(nISBN,infos.titre,infos.dateParution, infos.nomEditeur,infos.auteurs,infos.publicVise);
         this.lierOuvrage(ouvrage, nISBN);
         
+        ihm.informerUtilisateur("Création de l'ouvrage", true);
     }
+    
+    public void nouvelExemplaire(IHM ihm)
+    {
+        String nISBN = ihm.saisirISBNExiste(this.getNumsISBN());  
+
+        Ouvrage O = unOuvrage(nISBN);
+
+        IHM.InfosExemplaire infosExemplaire = ihm.saisirExemplaire(O.getDateParution());
+        O.ajouterExemplaire(infosExemplaire);
+
+        ihm.informerUtilisateur("Création de l'exemplaire", true);
+    }  
     
     public void nouveauLecteur(IHM ihm)
     {
         int nLecteur = this.incrementerNumLecteur();
         
-        IHM.InfosLecteur infosLecteur;
-        infosLecteur = ihm.saisirLecteur(nLecteur);
+        IHM.InfosLecteur infosLecteur = ihm.saisirLecteur(nLecteur);
         
-        Lecteur lecteur;
-        lecteur = new Lecteur(nLecteur,infosLecteur.nom,infosLecteur.prenom,infosLecteur.dateDeNaissance,infosLecteur.adresse,infosLecteur.email);
+        Lecteur l = new Lecteur(nLecteur,infosLecteur.nom,infosLecteur.prenom,infosLecteur.dateDeNaissance,infosLecteur.adresse,infosLecteur.email);
         
-        ihm.afficher("Création de lecteur");
-        this.lierLecteur(lecteur,nLecteur);
+        ihm.informerUtilisateur("Création de lecteur", true);
+        this.lierLecteur(l,nLecteur);
     }
     
     public void consulterLecteur(IHM ihm)
     {
         int nLecteur = ihm.saisirLecteurExiste(this.getNumsLecteurs());
         
-        Lecteur l = lecteurs.get(nLecteur);
-        ihm.afficherLecteur(l.getNom(), l.getPrenom(), nLecteur, l.getDateDeNaissance(), l.getAdresse(), l.getEmail());
+        if(nLecteur != 0)
+        {
+            Lecteur l = lecteurs.get(nLecteur);
+            ihm.afficherLecteur(l.getNom(), l.getPrenom(), nLecteur, l.getDateDeNaissance(), l.getAdresse(), l.getEmail()); 
+        }
     }
     
     public void consulterOuvrage(IHM ihm)
     {
         String nISBN = ihm.saisirISBNExiste(this.getNumsISBN());
         
-        Ouvrage o = ouvrages.get(nISBN);
-        ihm.afficheOuvrage(o.getISBN(), o.getTitre(), o.getAuteurs(), o.getNomEditeur(), o.getDateParution());
+        if(nISBN != "0")
+        {
+            Ouvrage o = ouvrages.get(nISBN);
+            ihm.afficheOuvrage(o.getISBN(), o.getTitre(), o.getAuteurs(), o.getNomEditeur(), o.getDateParution());     
+        }
     }
     
     public void consulterExemplaireOuvrage(IHM ihm)
     {
         String nISBN = ihm.saisirISBNExiste(this.getNumsISBN());
         
-        Ouvrage o = ouvrages.get(nISBN);
-        ihm.afficheOuvrage(o.getISBN(), o.getTitre(), o.getAuteurs(), o.getNomEditeur(), o.getDateParution());
-        
-        for(Exemplaire e : o.getExemplaires())
+        if(nISBN != "0")
         {
-            ihm.afficherExemplaire(e.getNumero(), e.getDateDeReception(), e.getEmpruntable());
+            Ouvrage o = ouvrages.get(nISBN);
+            ihm.afficheOuvrage(o.getISBN(), o.getTitre(), o.getAuteurs(), o.getNomEditeur(), o.getDateParution());
+
+            if(o.getExemplaires().size() == 0)
+            {
+                ihm.informerUtilisateur("Aucun exemplaire pour cet ouvrage", false);
+            }
+            else
+            {
+                for(Exemplaire e : o.getExemplaires())
+                {
+                    ihm.afficherExemplaire(e.getNumero(), e.getDateDeReception(), e.getEmpruntable());
+                }
+            }
         }
     }
     
@@ -128,24 +151,6 @@ public class Bibliotheque implements Serializable {
     {
         this.lecteurs.put(nLecteur, lecteur);
     }
-    
-    
-    public void nouvelExemplaire(IHM ihm)
-    {
-
-        String nISBN = ihm.saisirISBNExiste(this.getNumsISBN());  
-
-        Ouvrage O;
-        O = unOuvrage(nISBN);
-
-        IHM.InfosExemplaire infosExemplaire ;
-        infosExemplaire = ihm.saisirExemplaire(O.getDateParution());
-
-        O.ajouterExemplaire(infosExemplaire);
-        O.incrementNumDerEx();
-
-        ihm.afficher("Création de l'exemplaire");
-    }  
     
     public Ouvrage unOuvrage(String nISBN) {
 

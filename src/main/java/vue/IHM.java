@@ -77,11 +77,8 @@ private void gererDialogue(Commande cmd) {
     }
 }
 
-public void afficher(String message){
-    System.out.println(message);
-}
-
 public void afficherLecteur(String nom, String prenom, int numero, LocalDate dateDeNaissance, String adresse, String email){
+    ES.afficherTexte("Informations du lecteur : ");
     ES.afficherNom(nom);
     ES.afficherPrenom(prenom);
     ES.afficherNumero(numero);
@@ -91,18 +88,25 @@ public void afficherLecteur(String nom, String prenom, int numero, LocalDate dat
 }
 
 public void afficherExemplaire(int numero, LocalDate dateDeReception, boolean empruntable){
+    ES.afficherTexte("Informations de l'exemplaire : ");
     ES.afficherNumero(numero);
     ES.afficherDate(dateDeReception);
     ES.afficherBool(empruntable);
 }
 
 public void afficheOuvrage(String nISBN, String titre, ArrayList<String> nomAuteurs, String nomEditeur, LocalDate dateParution){
+    ES.afficherTexte("Informations de l'ouvrage : ");
     ES.afficherISBN(nISBN);
     ES.afficherTitre(titre);
     ES.afficherAuteurs(nomAuteurs);
     ES.afficherEditeur(nomEditeur);
     ES.afficherDate(dateParution);
 } 
+
+public void informerUtilisateur(String message, Boolean valide)
+{
+    ES.afficherLibelle(message + " : " + (valide ? "[OK]" : "[KO]"));
+}
 
 public boolean existeISBN(ArrayList<String> numsISBN, String numISBN){
   
@@ -128,34 +132,66 @@ public boolean existeLecteur(ArrayList<Integer> numsLecteur, int numLecteur){
 
 //Utiliser sc.nextInt au lieu de sc.nextLine
 public String saisirISBNnonExiste(ArrayList<String> numsISBN){
-    System.out.println("Entrez le Numéro ISBN:");
-    Scanner sc= new Scanner(System.in);
-    String n = sc.nextLine();
-    while(n !="0" && existeISBN(numsISBN,n)){
-        System.out.println("Le n° existe déjà, entrez un nouveau numéro ISBN:");
-        n = sc.nextLine();
+    ES.afficherLibelle("Entrez le Numéro ISBN:");
+    String nISBN = ES.lireChaine();
+    boolean test = true;
+    
+    while(test == true && existeISBN(numsISBN,nISBN)){
+        test = ES.lireBoolean("Le n° existe déjà, voulez-vous réessayer ?");
+        
+        if(test == true)
+        {
+            ES.afficherLibelle("Entrez un nouveau numéro ISBN:");
+            nISBN = ES.lireChaine();
+        }
+        else
+        {
+            nISBN = "0";
+        }
     } 
-   return n;
+   return nISBN;
 }
 
 public String saisirISBNExiste(ArrayList<String> numsISBN){
-   String n = "";
-   while(n !="0" && !existeISBN(numsISBN,n)){
-        Scanner sc= new Scanner(System.in);
-        System.out.println("Entrez le Numéro ISBN:");
-        n = sc.nextLine();
-    } 
-   return n;
+    ES.afficherLibelle("Entrez le Numéro ISBN:");
+    String nISBN = ES.lireChaine();
+    boolean test = true;
+    
+    while(test == true && !existeISBN(numsISBN,nISBN)){
+        test = ES.lireBoolean("Le n° n'existe pas, voulez-vous réessayer ?");
+        
+        if(test == true)
+        {
+            ES.afficherLibelle("Entrez un nouveau numéro ISBN:");
+            nISBN = ES.lireChaine();
+        }
+        else
+        {
+            nISBN = "0";
+        }
+   }
+   return nISBN;
 }
 
 public int saisirLecteurExiste(ArrayList<Integer> numsLecteur){
-   int n = -1;
-   while(n !=0 && !existeLecteur(numsLecteur,n)){
-        Scanner sc= new Scanner(System.in);
-        System.out.println("Entrez le Numéro de Lecteur:");
-        n = sc.nextInt();
+    ES.afficherLibelle("Entrez le Numéro de lecteur:");
+    int nLecteur = ES.lireEntier();
+    boolean test = true;
+    
+    while(test == true && !existeLecteur(numsLecteur,nLecteur)){
+        test = ES.lireBoolean("Le n° n'existe pas, voulez-vous réessayer ?");
+        
+        if(test == true)
+        {
+            ES.afficherLibelle("Entrez un nouveau numéro de lecteur:");
+            nLecteur = ES.lireEntier();
+        }
+        else
+        {
+            nLecteur = 0;
+        }
     } 
-   return n;
+    return nLecteur;
 }
 
 public InfosOuvrage saisirOuvrage()
@@ -164,11 +200,11 @@ public InfosOuvrage saisirOuvrage()
     LocalDate dateParution;
     ArrayList<String> auteurs = new ArrayList<String>();
     PublicVise publicVise = null;
-    Scanner sc= new Scanner(System.in);
-    int test = 1;
+    Boolean test = true;
     int nPublic = 0;
+    Scanner sc= new Scanner(System.in);
     
-    ES.afficherTitre("Saisir les informations de l'ouvrage");
+    ES.afficherTexte("Saisir les informations de l'ouvrage");
     titre = ES.lireChaine("- Titre de l'ouvrage");
     dateParution = ES.lireDate("- Date de parution");
 
@@ -178,26 +214,25 @@ public InfosOuvrage saisirOuvrage()
     }
     nomEditeur = ES.lireChaine("- Nom de l'éditeur");
     
-    while(test != 0)
+    while(test == true)
     {
         auteurs.add(ES.lireChaine("- Entrer le nom d'un auteur"));
-        afficher("Il y a-t-il un autre auteur ? - Si non, entrez 0");
-        test = sc.nextInt();
+        test = ES.lireBoolean("Voulez-vous entrer un autre auteur ?");
     }
     
-    test = 1;
-    afficher("- Entrer 1 pour adulte, 2 pour ado, 3 pour enfant");
+    test = true;
+    ES.afficherLibelle("- Entrer 1 pour adulte, 2 pour ado, 3 pour enfant");
     
-    while(test != 0)
+    while(test == true)
     {
         nPublic = sc.nextInt(); 
         if(nPublic != 1 && nPublic != 2 && nPublic != 3)
         {
-            afficher("-- Le numéro doit être 1, 2 ou 3");
+            ES.afficherLibelle("-- Le numéro doit être 1, 2 ou 3");
         }
         else 
         {
-            test = 0;
+            test = false;
         }
     }
     

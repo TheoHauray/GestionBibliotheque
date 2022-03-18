@@ -19,7 +19,7 @@ public class Test_it1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-    Bibliotheque bibliotheque = new Bibliotheque();
+    Bibliotheque bibliotheque = null;
 
     try {
         bibliotheque = Persisteur.lireEtat();

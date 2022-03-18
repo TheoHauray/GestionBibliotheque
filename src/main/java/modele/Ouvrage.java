@@ -22,9 +22,9 @@ public class Ouvrage implements Serializable{
     private String nomEditeur;
     private ArrayList<String> auteurs;
     private PublicVise publicVise;
-    private int numDerEx;
     private ArrayList<Exemplaire> exemplaires;
-    
+    private int numDerEx;
+
     //Constructeur
     //-----------------------------------------------
     public Ouvrage(String nISBN,String titre,LocalDate dateParution,String nomEditeur,ArrayList<String> auteurs,PublicVise publicVise)
@@ -67,9 +67,8 @@ public class Ouvrage implements Serializable{
         return this.exemplaires;
     }
     
-    public int incrementNumDerEx() {
+    public void incrementNumDerEx() {
         numDerEx = numDerEx + 1;
-        return getNumDerEx();
     }
     
     public void lierExemplaire(Exemplaire ex) {
@@ -81,6 +80,7 @@ public class Ouvrage implements Serializable{
         Exemplaire e;
         e= new Exemplaire(this.getNumDerEx(), infosExemplaire.dateReception, infosExemplaire.empruntable);
         
+        this.incrementNumDerEx();
         this.lierExemplaire(e);
     }
 }

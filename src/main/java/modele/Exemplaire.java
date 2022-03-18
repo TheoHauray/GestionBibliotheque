@@ -13,18 +13,18 @@ import java.time.LocalDate;
  */
 public class Exemplaire implements Serializable {
     private static final long serialVersionUID = 1L;
-    private int numero;
+    private int nExemplaire;
     private LocalDate dateDeReception;
     private boolean empruntable;
     
-    public Exemplaire (int numero, LocalDate dateDeReception,boolean empruntable ) {
-        this.numero = numero;
+    public Exemplaire (int nExemplaire, LocalDate dateDeReception,boolean empruntable ) {
+        this.nExemplaire = nExemplaire;
         this.dateDeReception = dateDeReception;
         this.empruntable = empruntable;
     }
 
     public int getNumero(){
-    return numero;
+    return nExemplaire;
     }
     
     public LocalDate getDateDeReception(){

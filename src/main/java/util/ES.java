@@ -46,9 +46,18 @@ try {
 public static Boolean lireBoolean(String libelle){
     
     System.out.println(libelle);
-    String test = ES.lireChaine("Saisir 'o' pour oui, 'n' pour non");
+    int test = 2;
     
-    if(test == "o")
+    ES.afficherLibelle("Saisir 1 pour oui, 0 pour non");
+    test = ES.lireEntier();
+    
+    while(test != 1 && test != 0)
+    {
+        ES.afficherLibelle("! Saisir 1 ou 0 !");
+        test = ES.lireEntier();
+    }
+    
+    if(test == 1)
     {
         return true;
     }
@@ -241,21 +250,20 @@ return dateCourante.getMonthValue();
 
 public static void afficherTexte(String texte) {
 System.out.println();
-System.out.println(texte);
+System.out.println("Texte : "+texte);
 System.out.flush();
 }
 
 
 public static void afficherTitre(String titre) {
 System.out.println();
-System.out.println(titre);
+System.out.println("Titre : "+titre);
 System.out.println();
 System.out.flush();
 }
 
 public static void afficherDate(LocalDate date) {
-System.out.println();
-System.out.println(date);
+System.out.println("Date : "+date);
 System.out.flush();
 }
 
