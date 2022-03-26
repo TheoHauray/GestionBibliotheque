@@ -87,7 +87,7 @@ private void gererDialogue(Commande cmd) {
 }
 
 public void afficherLecteur(String nom, String prenom, int numero, LocalDate dateDeNaissance, String adresse, String email){
-    ES.afficherTexte("Informations du lecteur : ");
+    ES.afficherAction("Informations du lecteur");
     ES.afficherNom(nom);
     ES.afficherPrenom(prenom);
     ES.afficherNumero(numero);
@@ -97,14 +97,14 @@ public void afficherLecteur(String nom, String prenom, int numero, LocalDate dat
 }
 
 public void afficherExemplaire(int numero, LocalDate dateDeReception, boolean empruntable){
-    ES.afficherTexte("Informations de l'exemplaire : ");
+    ES.afficherAction("Informations de l'exemplaire");
     ES.afficherNumero(numero);
     ES.afficherDate("Date de réception : ",dateDeReception);
     ES.afficherBool("Empruntable : ", empruntable);
 }
 
 public void afficheOuvrage(String nISBN, String titre, ArrayList<String> nomAuteurs, String nomEditeur, LocalDate dateParution){
-    ES.afficherTexte("Informations de l'ouvrage : ");
+    ES.afficherAction("Informations de l'ouvrage");
     ES.afficherTitre(titre);
     ES.afficherISBN(nISBN);
     ES.afficherAuteurs(nomAuteurs);
@@ -114,7 +114,7 @@ public void afficheOuvrage(String nISBN, String titre, ArrayList<String> nomAute
 
 public void afficherLecteurEmprunt(String nom,String prenom,int numero)
 {
-    ES.afficherTexte("Informations du lecteur : ");
+    ES.afficherAction("Informations du lecteur");
     ES.afficherNom(nom);
     ES.afficherPrenom(prenom);
     ES.afficherNumero(numero);
@@ -122,7 +122,7 @@ public void afficherLecteurEmprunt(String nom,String prenom,int numero)
 
 public void afficheEmpruntExemplaire(String titre,String nISBN,int nExemplaire,LocalDate dateDebut,LocalDate dateFin)
 {
-    ES.afficherTexte("Informations de l'exemplaire : ");
+    ES.afficherAction("Informations de l'exemplaire : ");
     ES.afficherTitre(titre);
     ES.afficherISBN(nISBN);
     ES.afficherNumero(nExemplaire);
@@ -139,8 +139,8 @@ public void informerUtilisateur(String message, Boolean valide)
 
 //Utiliser sc.nextInt au lieu de sc.nextLine
 public String saisirISBNnonExiste(ArrayList<String> numsISBN){
-    ES.afficherLibelle("Entrez le Numéro ISBN:");
-    String nISBN = ES.lireChaine();
+    ES.afficherAction("Ouvrage");
+    String nISBN = ES.lireChaine("- Numéro ISBN : ");
     boolean test = true;
     
     while(test == true && ES.existeString(numsISBN,nISBN)){
@@ -148,7 +148,7 @@ public String saisirISBNnonExiste(ArrayList<String> numsISBN){
         
         if(test == true)
         {
-            ES.afficherLibelle("Entrez un nouveau numéro ISBN:");
+            ES.afficherLibelle("- Entrez un nouveau numéro ISBN:");
             nISBN = ES.lireChaine();
         }
         else
@@ -160,16 +160,16 @@ public String saisirISBNnonExiste(ArrayList<String> numsISBN){
 }
 
 public String saisirISBNExiste(ArrayList<String> numsISBN){
-    ES.afficherLibelle("Entrez le Numéro ISBN:");
-    String nISBN = ES.lireChaine();
+    ES.afficherAction("Ouvrage");
+    String nISBN = ES.lireChaine("- Numéro ISBN : ");
     boolean test = true;
     
     while(test == true && !ES.existeString(numsISBN,nISBN)){
-        test = ES.lireBoolean("Le n° n'existe pas, voulez-vous réessayer ?");
+        test = ES.lireBoolean("Le n n'existe pas, voulez-vous réessayer ?");
         
         if(test == true)
         {
-            ES.afficherLibelle("Entrez un nouveau numéro ISBN:");
+            ES.afficherLibelle("- Entrez un nouveau numéro ISBN:");
             nISBN = ES.lireChaine();
         }
         else
@@ -182,8 +182,8 @@ public String saisirISBNExiste(ArrayList<String> numsISBN){
 
 public int saisirExemplaireExiste(ArrayList<Integer> numsExemplaires)
 {
-    ES.afficherLibelle("Entrez le Numéro de l'exemplaire:");
-    int nExemplaire = ES.lireEntier();
+    ES.afficherAction("Exemplaire");
+    int nExemplaire = ES.lireEntier("- Entrer le Numéro de l'exemplaire:");
     boolean test = true;
     
     while(test == true && !ES.existeInteger(numsExemplaires,nExemplaire)){
@@ -191,8 +191,7 @@ public int saisirExemplaireExiste(ArrayList<Integer> numsExemplaires)
         
         if(test == true)
         {
-            ES.afficherLibelle("Entrez un nouveau numéro d'exemplaire:");
-            nExemplaire = ES.lireEntier();
+            nExemplaire = ES.lireEntier("- Entrer un nouveau numéro d'exemplaire : ");
         }
         else
         {
@@ -203,8 +202,8 @@ public int saisirExemplaireExiste(ArrayList<Integer> numsExemplaires)
 }
 
 public int saisirLecteurExiste(ArrayList<Integer> numsLecteur){
-    ES.afficherLibelle("Entrez le Numéro du lecteur :");
-    int nLecteur = ES.lireEntier();
+    ES.afficherAction("Lecteur");
+    int nLecteur = ES.lireEntier("- Entrer le Numéro du lecteur :");
     boolean test = true;
     
     while(test == true && !ES.existeInteger(numsLecteur,nLecteur)){
@@ -212,8 +211,7 @@ public int saisirLecteurExiste(ArrayList<Integer> numsLecteur){
         
         if(test == true)
         {
-            ES.afficherLibelle("Entrez un nouveau numéro de lecteur:");
-            nLecteur = ES.lireEntier();
+            nLecteur = ES.lireEntier("- Entrer un nouveau numéro de lecteur : ");
         }
         else
         {
@@ -233,31 +231,31 @@ public InfosOuvrage saisirOuvrage()
     int nPublic = 0;
     Scanner sc= new Scanner(System.in);
     
-    ES.afficherTexte("Saisir les informations de l'ouvrage");
-    titre = ES.lireChaine("- Titre de l'ouvrage");
-    dateParution = ES.lireDate("- Date de parution");
+    ES.afficherAction("Saisir les informations de l'ouvrage");
+    titre = ES.lireChaine("- Titre de l'ouvrage : ");
+    dateParution = ES.lireDate("- Date de parution : ");
 
     while(dateParution.isAfter(now()))
     {
-        dateParution = ES.lireDate("-- La date de parution doit être antérieur à la date du jour.");
+        dateParution = ES.lireDate("La date de parution doit être antérieur à la date du jour.\nEntrer une nouvelle date : ");
     }
-    nomEditeur = ES.lireChaine("- Nom de l'éditeur");
+    nomEditeur = ES.lireChaine("- Nom de l'éditeur : ");
     
     while(test == true)
     {
-        auteurs.add(ES.lireChaine("- Entrer le nom d'un auteur"));
+        auteurs.add(ES.lireChaine("- Entrer le nom d'un auteur : "));
         test = ES.lireBoolean("Voulez-vous entrer un autre auteur ?");
     }
     
     test = true;
-    ES.afficherLibelle("- Entrer 1 pour adulte, 2 pour ado, 3 pour enfant");
+    ES.afficherLibelle("Entrer 1 pour adulte, 2 pour ado, 3 pour enfant");
     
     while(test == true)
     {
         nPublic = sc.nextInt(); 
         if(nPublic != 1 && nPublic != 2 && nPublic != 3)
         {
-            ES.afficherLibelle("-- Le numéro doit être 1, 2 ou 3");
+            ES.afficherLibelle("Le numéro doit être 1, 2 ou 3.\nEntrer un nouveau numéro : ");
         }
         else 
         {
@@ -288,15 +286,15 @@ public InfosExemplaire saisirExemplaire(LocalDate dateParution)
     LocalDate dateReception;
     boolean empruntable;
     
-    ES.afficherTitre("Saisir les informations de l'exemplaire");
-    dateReception = ES.lireDate("- Date de réception");
+    ES.afficherAction("Saisir les informations de l'exemplaire");
+    dateReception = ES.lireDate("- Date de réception : ");
     
     while(dateReception.isBefore(dateParution) || dateReception.isAfter(now()))
     {
-        dateReception = ES.lireDate("-- La date de réception doit être postérieure à la date de parution.\n Veuillez entrer une nouvelle date");
+        dateReception = ES.lireDate("La date de réception doit être postérieure à la date de parution.\n Veuillez entrer une nouvelle date");
     }
     
-    empruntable = ES.lireBoolean("- L'exemplaire est-il empruntable ?");
+    empruntable = ES.lireBoolean("L'exemplaire est-il empruntable ?");
     InfosExemplaire infosExemplaire = new InfosExemplaire(dateReception, empruntable);
     
     return infosExemplaire;
@@ -317,7 +315,7 @@ public InfosLecteur saisirLecteur(int nLecteur)
     
     while(dateDeNaissance.isAfter(now()))
     {
-        dateDeNaissance = ES.lireDate("-- La date de naissance doit être antérieure à la date du jour.");
+        dateDeNaissance = ES.lireDate("La date de naissance doit être antérieure à la date du jour.\nEntrer une nouvelle date : ");
     }
     
     InfosLecteur infosLecteur = new InfosLecteur(nom, prenom, dateDeNaissance, adresse, email);

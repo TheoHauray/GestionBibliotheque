@@ -248,9 +248,10 @@ return dateCourante.getMonthValue();
 */
 
 
-public static void afficherTexte(String texte) {
-System.out.println();
+public static void afficherAction(String texte) {
+System.out.println("----------------------------------");
 System.out.println(texte);
+System.out.println("----------------------------------");
 System.out.flush();
 }
 
