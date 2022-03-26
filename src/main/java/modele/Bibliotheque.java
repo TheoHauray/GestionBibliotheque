@@ -238,6 +238,45 @@ public class Bibliotheque implements Serializable {
         }
     }
     
+    public void consulterEmpruntsLecteur(IHM ihm)
+    {
+        int nLecteur = ihm.saisirLecteurExiste(this.getNumsLecteurs());
+        
+        if(nLecteur != 0)
+        {
+            Lecteur l = lecteurs.get(nLecteur);
+            
+            int numero = l.getNumero();
+            String nom = l.getNom();
+            String prenom = l.getPrenom();
+            
+            ihm.afficherLecteurEmprunt(nom, prenom, numero);
+            
+            ArrayList<Emprunt> emprunts = l.getEmprunts();
+            
+            if(emprunts != null)
+            {
+                for(Emprunt emprunt : emprunts)
+                {
+                    Exemplaire e = emprunt.getExemplaire();
+                    Ouvrage o = e.getOuvrage();
+                    
+                    int nExemplaire = e.getNumero();
+                    String titre = o.getTitre();
+                    String nISBN = o.getISBN();
+                    LocalDate dateDebut = emprunt.getDateDebut();
+                    LocalDate dateFin = emprunt.getDateFin();
+                    
+                    ihm.afficheEmpruntExemplaire(titre, nISBN, nExemplaire, dateDebut, dateFin);
+                }
+            }
+            else
+            {
+                ihm.informerUtilisateur("Aucun emprunt en cours", false);
+            }
+        }
+    }
+    
     public void lierOuvrage(Ouvrage ouvrage, String nISBN)
     {
         this.ouvrages.put(nISBN, ouvrage);

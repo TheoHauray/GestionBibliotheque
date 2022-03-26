@@ -262,8 +262,8 @@ System.out.println();
 System.out.flush();
 }
 
-public static void afficherDate(LocalDate date) {
-System.out.println("Date : "+date);
+public static void afficherDate(String type, LocalDate date) {
+System.out.println(type+"(aaaa-mm-jj) : "+date);
 System.out.flush();
 }
 
@@ -333,14 +333,14 @@ System.out.println("Date de naissance (aaaa-mm-jj) : "+dateDeNaissance);
 System.out.flush();
 }
 
-public static void afficherBool(boolean b) {
+public static void afficherBool(String type, boolean b) {
     if(b == true)
     {
-        System.out.println("Vrai");
+        System.out.println(type+"Vrai");
     }
     else
     {
-        System.out.println("Faux");
+        System.out.println(type+"Faux");
     }
 System.out.flush();
 }

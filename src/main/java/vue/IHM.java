@@ -77,6 +77,10 @@ private void gererDialogue(Commande cmd) {
             break;
         case RENDRE_EXEMPLAIRE:
             bibliotheque.rendreExemplaire(this);
+            break;
+        case CONSULTER_EMPRUNT_LECTEUR:
+            bibliotheque.consulterEmpruntsLecteur(this);
+            break;
         default:
             assert false : "Commande inconnue.";
     }
@@ -87,7 +91,7 @@ public void afficherLecteur(String nom, String prenom, int numero, LocalDate dat
     ES.afficherNom(nom);
     ES.afficherPrenom(prenom);
     ES.afficherNumero(numero);
-    ES.afficherDate(dateDeNaissance);
+    ES.afficherDate("Date de naissance : ",dateDeNaissance);
     ES.afficherAddresse(adresse);
     ES.afficherEmail(email);
 }
@@ -95,8 +99,8 @@ public void afficherLecteur(String nom, String prenom, int numero, LocalDate dat
 public void afficherExemplaire(int numero, LocalDate dateDeReception, boolean empruntable){
     ES.afficherTexte("Informations de l'exemplaire : ");
     ES.afficherNumero(numero);
-    ES.afficherDate(dateDeReception);
-    ES.afficherBool(empruntable);
+    ES.afficherDate("Date de réception : ",dateDeReception);
+    ES.afficherBool("Empruntable : ", empruntable);
 }
 
 public void afficheOuvrage(String nISBN, String titre, ArrayList<String> nomAuteurs, String nomEditeur, LocalDate dateParution){
@@ -105,8 +109,25 @@ public void afficheOuvrage(String nISBN, String titre, ArrayList<String> nomAute
     ES.afficherTitre(titre);
     ES.afficherAuteurs(nomAuteurs);
     ES.afficherEditeur(nomEditeur);
-    ES.afficherDate(dateParution);
+    ES.afficherDate("Date de parution", dateParution);
 } 
+
+public void afficherLecteurEmprunt(String nom,String prenom,int numero)
+{
+    ES.afficherTexte("Informations du lecteur : ");
+    ES.afficherNom(nom);
+    ES.afficherPrenom(prenom);
+    ES.afficherNumero(numero);
+}
+
+public void afficheEmpruntExemplaire(String titre,String nISBN,int nExemplaire,LocalDate dateDebut,LocalDate dateFin)
+{
+    ES.afficherISBN(nISBN);
+    ES.afficherTitre(titre);
+    ES.afficherNumero(nExemplaire);
+    ES.afficherDate("Date début : ", dateDebut);
+    ES.afficherDate("Date fin : ", dateDebut);
+}
 
 public void informerUtilisateur(String message, Boolean valide)
 {

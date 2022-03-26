@@ -103,6 +103,11 @@ public class Lecteur implements Serializable{
         return em;
     }
     
+    public ArrayList<Emprunt> getEmprunts()
+    {
+        return this.emprunts;
+    }
+    
     public boolean lecteurConforme(PublicVise publicVise)
     {
         switch(publicVise)
@@ -132,7 +137,7 @@ public class Lecteur implements Serializable{
     {
         for(Emprunt em : this.emprunts)
         {
-            if(em == emprunt)
+            if(em.compareTo(emprunt) == 0)
             {
                 em = null;
             }

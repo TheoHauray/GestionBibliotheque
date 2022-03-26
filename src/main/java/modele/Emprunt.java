@@ -19,7 +19,7 @@ public class Emprunt implements Comparable<Emprunt>{
     public Emprunt(Exemplaire exemplaire, Lecteur lecteur)
     {
         this.dateDebut = LocalDate.now();
-        this.dateFin = LocalDate.now().plusDays(15);
+        this.dateFin = this.dateDebut.plusDays(15);
         this.lecteur = lecteur;
         this.exemplaire = exemplaire;
         
@@ -46,6 +46,16 @@ public class Emprunt implements Comparable<Emprunt>{
         return this.lecteur;
     }
     
+    public LocalDate getDateDebut()
+    {
+        return this.dateDebut;
+    }
+    
+    public LocalDate getDateFin()
+    {
+        return this.dateFin;
+    }
+    
     public void supprimerEmprunt()
     {
         this.exemplaire.retirerEmpruntExemplaire(this);
@@ -54,7 +64,7 @@ public class Emprunt implements Comparable<Emprunt>{
 
     @Override
     public int compareTo(Emprunt o) {
-        if(this.exemplaire == o.exemplaire && this.lecteur.getNumero() == o.lecteur.getNumero())
+        if(this.exemplaire.compareTo(o.exemplaire) == 0 && this.lecteur.getNumero() == o.lecteur.getNumero())
         {
             return 0;
         }
