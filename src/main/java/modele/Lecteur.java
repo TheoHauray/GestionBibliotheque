@@ -74,16 +74,9 @@ public class Lecteur implements Serializable{
             if(this.emprunts.size() == 5)
             {
                 return true;
-            }
-            else
-            {
-                return false;
-            }       
+            }    
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
     
     public Emprunt getEmprunt(Ouvrage ouvrage, int nExemplaire)
