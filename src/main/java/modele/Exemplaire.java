@@ -16,11 +16,13 @@ public class Exemplaire implements Serializable {
     private int nExemplaire;
     private LocalDate dateDeReception;
     private boolean empruntable;
+    private Emprunt emprunt;
     
     public Exemplaire (int nExemplaire, LocalDate dateDeReception,boolean empruntable ) {
         this.nExemplaire = nExemplaire;
         this.dateDeReception = dateDeReception;
         this.empruntable = empruntable;
+        this.emprunt = null;
     }
 
     public int getNumero(){
@@ -35,4 +37,25 @@ public class Exemplaire implements Serializable {
         return empruntable;
     }
     
+    public boolean getEmpruntEnCours()
+    {
+        if(this.emprunt == null)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    
+    public void lierEmpruntExemplaire(Emprunt emprunt)
+    {
+        this.emprunt = emprunt;
+    }
+    
+    public void ajouterEmpruntExemplaire(Emprunt emprunt)
+    {
+        this.lierEmpruntExemplaire(emprunt);
+    }
 }

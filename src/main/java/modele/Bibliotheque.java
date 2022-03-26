@@ -26,16 +26,18 @@ public class Bibliotheque implements Serializable {
     //Attributs
     //-----------------------------------------------
     private int numDerLecteur;
-    HashMap<String, Ouvrage> ouvrages = new HashMap<String, Ouvrage>();
-    HashMap<Integer, Lecteur> lecteurs = new HashMap<Integer, Lecteur>();
+    HashMap<String, Ouvrage> ouvrages;
+    HashMap<Integer, Lecteur> lecteurs;
+    ArrayList<Emprunt> emprunts;
     
     //Constructeur
     //-----------------------------------------------
     public Bibliotheque()
     {
         this.numDerLecteur = 0;
-        ouvrages = new HashMap<String, Ouvrage>();
-        lecteurs = new HashMap<Integer, Lecteur>();
+        this.ouvrages = new HashMap<String, Ouvrage>();
+        this.lecteurs = new HashMap<Integer, Lecteur>();
+        this.emprunts = new ArrayList<Emprunt>();
     }
     //Méthodes
     //-----------------------------------------------
@@ -142,6 +144,62 @@ public class Bibliotheque implements Serializable {
         }
     }
     
+    public void emprunterExemplaire(IHM ihm)
+    {
+        int nLecteur = ihm.saisirLecteurExiste(this.getNumsLecteurs());
+        
+        if(nLecteur != 0)
+        {
+            Lecteur l = lecteurs.get(nLecteur);
+            
+            if(l.sature() == false)
+            {
+                String nISBN = ihm.saisirISBNExiste(this.getNumsISBN());
+        
+                if(nISBN != "0")
+                {
+                    Ouvrage o = ouvrages.get(nISBN); 
+                    
+                    if(l.lecteurConforme(o.getPublicVise()) == true)
+                    {
+                        int nExemplaire = ihm.saisirExemplaireExiste(o.getNumsExemplaires());
+
+                        if(nExemplaire != 0)
+                        {
+                            Exemplaire e = o.unExemplaire(nExemplaire);
+
+                            if(e.getEmpruntable() == false)
+                            {
+                                ihm.informerUtilisateur("L'exemplaire n'est pas empruntable", false);
+                            }
+                            
+                            else if(e.getEmpruntEnCours() == true)
+                            {
+                                ihm.informerUtilisateur("L'exemplaire est déjà emprunté", false);
+                            }
+                            
+                            else
+                            {
+                                Emprunt em = new Emprunt(e,l);
+                                this.lierEmprunt(em);
+                                
+                                ihm.informerUtilisateur("Emprunt créé", true);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        ihm.informerUtilisateur("Le lecteur n'est pas conforme avec le public visé de l'ouvrage", false);
+                    }
+                }
+            }
+            else
+            {
+                ihm.informerUtilisateur("Le lecteur a déjà emprunté 5 exemplaires", false);
+            }
+        }
+    }
+    
     public void lierOuvrage(Ouvrage ouvrage, String nISBN)
     {
         this.ouvrages.put(nISBN, ouvrage);
@@ -150,6 +208,11 @@ public class Bibliotheque implements Serializable {
     public void lierLecteur(Lecteur lecteur, int nLecteur)
     {
         this.lecteurs.put(nLecteur, lecteur);
+    }
+    
+    public void lierEmprunt(Emprunt emprunt)
+    {
+        this.emprunts.add(emprunt);
     }
     
     public Ouvrage unOuvrage(String nISBN) {

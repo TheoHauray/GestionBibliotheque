@@ -16,7 +16,8 @@ CONSULTER_LECTEURS (2,"Afficher un lecteur"),
 CREER_OUVRAGE (3,"Créer un nouvel ouvrage"),
 AFFICHER_OUVRAGE (4,"Afficher un ouvrage"),
 CREER_EXEMPLAIRE (5, "Créer un nouvel exemplaire"),
-AFFICHER_EXEMPLAIRE (6,"Afficher les exemplaires d'un ouvrage");
+AFFICHER_EXEMPLAIRE (6,"Afficher les exemplaires d'un ouvrage"),
+EMPRUNTER_EXEMPLAIRE (7, "Créer un emprunt");
 
 
 private final int code;

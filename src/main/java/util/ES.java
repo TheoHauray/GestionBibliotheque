@@ -250,7 +250,7 @@ return dateCourante.getMonthValue();
 
 public static void afficherTexte(String texte) {
 System.out.println();
-System.out.println("Texte : "+texte);
+System.out.println(texte);
 System.out.flush();
 }
 
@@ -343,6 +343,28 @@ public static void afficherBool(boolean b) {
         System.out.println("Faux");
     }
 System.out.flush();
+}
+
+public static boolean existeString(ArrayList<String> chaineS, String chaine){
+  
+    for (String s: chaineS){
+       
+        if (s.equals(chaine)){
+               return true;    
+        }
+    }
+    return false;
+}
+
+public static boolean existeInteger(ArrayList<Integer> numS, int num){
+  
+    for (int s: numS){
+       
+        if (s == num){
+               return true;    
+        }
+    }
+    return false;
 }
 
 }
