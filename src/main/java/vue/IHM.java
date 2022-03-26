@@ -74,6 +74,7 @@ private void gererDialogue(Commande cmd) {
             break;
         case EMPRUNTER_EXEMPLAIRE:
             bibliotheque.emprunterExemplaire(this);
+            break;
         case RENDRE_EXEMPLAIRE:
             bibliotheque.rendreExemplaire(this);
         default:

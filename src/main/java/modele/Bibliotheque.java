@@ -67,24 +67,31 @@ public class Bibliotheque implements Serializable {
     public void nouvelOuvrage(IHM ihm)
     {
         String nISBN = ihm.saisirISBNnonExiste(this.getNumsISBN());
-        IHM.InfosOuvrage infos = ihm.saisirOuvrage();
         
-        Ouvrage ouvrage = new Ouvrage(nISBN,infos.titre,infos.dateParution, infos.nomEditeur,infos.auteurs,infos.publicVise);
-        this.lierOuvrage(ouvrage, nISBN);
-        
-        ihm.informerUtilisateur("Création de l'ouvrage", true);
+        if(nISBN != "0")
+        {
+            IHM.InfosOuvrage infos = ihm.saisirOuvrage();
+
+            Ouvrage ouvrage = new Ouvrage(nISBN,infos.titre,infos.dateParution, infos.nomEditeur,infos.auteurs,infos.publicVise);
+            this.lierOuvrage(ouvrage, nISBN);
+
+            ihm.informerUtilisateur("Création de l'ouvrage", true);
+        }
     }
     
     public void nouvelExemplaire(IHM ihm)
     {
         String nISBN = ihm.saisirISBNExiste(this.getNumsISBN());  
+        
+        if(nISBN != "0")
+        {
+            Ouvrage O = unOuvrage(nISBN);
 
-        Ouvrage O = unOuvrage(nISBN);
+            IHM.InfosExemplaire infosExemplaire = ihm.saisirExemplaire(O.getDateParution());
+            O.ajouterExemplaire(infosExemplaire);
 
-        IHM.InfosExemplaire infosExemplaire = ihm.saisirExemplaire(O.getDateParution());
-        O.ajouterExemplaire(infosExemplaire);
-
-        ihm.informerUtilisateur("Création de l'exemplaire", true);
+            ihm.informerUtilisateur("Création de l'exemplaire", true);  
+        }
     }  
     
     public void nouveauLecteur(IHM ihm)

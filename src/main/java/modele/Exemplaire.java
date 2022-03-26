@@ -20,11 +20,11 @@ public class Exemplaire implements Comparable<Exemplaire>, Serializable {
     private Ouvrage ouvrage;
     
     public Exemplaire (Ouvrage ouvrage, int nExemplaire, LocalDate dateDeReception,boolean empruntable) {
+        this.ouvrage = ouvrage;
         this.nExemplaire = nExemplaire;
         this.dateDeReception = dateDeReception;
         this.empruntable = empruntable;
         this.emprunt = null;
-        this.ouvrage = null;
     }
 
     public int getNumero(){
