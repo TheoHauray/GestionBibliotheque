@@ -158,6 +158,10 @@ public class Bibliotheque implements Serializable {
                         
                         ihm.afficherLecteurEmprunt(nom, prenom, numero);
                     }
+                    else
+                    {
+                        ihm.informerUtilisateur("Aucun emprunt en cours sur cet exemplaire", true);
+                    }
                 }
             }
         }

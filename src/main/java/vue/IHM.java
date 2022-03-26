@@ -122,6 +122,7 @@ public void afficherLecteurEmprunt(String nom,String prenom,int numero)
 
 public void afficheEmpruntExemplaire(String titre,String nISBN,int nExemplaire,LocalDate dateDebut,LocalDate dateFin)
 {
+    ES.afficherTexte("Informations de l'exemplaire : ");
     ES.afficherTitre(titre);
     ES.afficherISBN(nISBN);
     ES.afficherNumero(nExemplaire);
