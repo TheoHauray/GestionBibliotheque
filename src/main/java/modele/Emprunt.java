@@ -10,7 +10,7 @@ import java.time.LocalDate;
  *
  * @author hauraytheo
  */
-public class Emprunt {
+public class Emprunt implements Comparable<Emprunt>{
     private LocalDate dateDebut;
     private LocalDate dateFin;
     private Lecteur lecteur;
@@ -34,5 +34,33 @@ public class Emprunt {
         exemplaire.lierEmpruntExemplaire(em);
         
         return em;
+    }
+    
+    public Exemplaire getExemplaire()
+    {
+        return this.exemplaire;
+    }
+    
+    public Lecteur getLecteur()
+    {
+        return this.lecteur;
+    }
+    
+    public void supprimerEmprunt()
+    {
+        this.exemplaire.retirerEmpruntExemplaire(this);
+        this.lecteur.retirerEmpruntLecteur(this);
+    }
+
+    @Override
+    public int compareTo(Emprunt o) {
+        if(this.exemplaire == o.exemplaire && this.lecteur.getNumero() == o.lecteur.getNumero())
+        {
+            return 0;
+        }
+        else
+        {
+            return 1;
+        }
     }
 }

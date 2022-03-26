@@ -200,6 +200,37 @@ public class Bibliotheque implements Serializable {
         }
     }
     
+    public void rendreExemplaire(IHM ihm)
+    {
+        int nLecteur = ihm.saisirLecteurExiste(this.getNumsLecteurs());
+        
+        if(nLecteur != 0)
+        {
+            Lecteur l = lecteurs.get(nLecteur);
+            
+            String nISBN = ihm.saisirISBNExiste(this.getNumsISBN());
+        
+                if(nISBN != "0")
+                {
+                    Ouvrage o = ouvrages.get(nISBN); 
+                    
+                    int nExemplaire = ihm.saisirExemplaireExiste(o.getNumsExemplaires());
+
+                        if(nExemplaire != 0)
+                        {
+                            Emprunt em = l.getEmprunt(o, nExemplaire);
+                            
+                            if(em != null)
+                            {
+                                em.supprimerEmprunt();
+                                this.retirerEmpruntBibliotheque(em);
+                                ihm.informerUtilisateur("Emprunt retiré", true);
+                            }
+                        }
+                }
+        }
+    }
+    
     public void lierOuvrage(Ouvrage ouvrage, String nISBN)
     {
         this.ouvrages.put(nISBN, ouvrage);
@@ -232,6 +263,17 @@ public class Bibliotheque implements Serializable {
         this.numDerLecteur++;
         
         return this.numDerLecteur;
+    }
+    
+    public void retirerEmpruntBibliotheque(Emprunt emprunt)
+    {
+        for(Emprunt em : this.emprunts)
+        {
+            if(em == emprunt)
+            {
+                em = null;
+            }
+        }
     }
     
     /**

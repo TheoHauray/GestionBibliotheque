@@ -86,6 +86,23 @@ public class Lecteur implements Serializable{
         }
     }
     
+    public Emprunt getEmprunt(Ouvrage ouvrage, int nExemplaire)
+    {
+        Emprunt em = null;
+        
+        if(this.emprunts != null)
+        {
+            for(Emprunt emprunt : this.emprunts)
+            {
+                if(emprunt.getExemplaire().getOuvrage().getISBN().equals(ouvrage.getISBN()))
+                {
+                    em = emprunt;
+                }
+            }
+        }
+        return em;
+    }
+    
     public boolean lecteurConforme(PublicVise publicVise)
     {
         switch(publicVise)
@@ -109,5 +126,16 @@ public class Lecteur implements Serializable{
     public void ajouterEmpruntLecteur(Emprunt emprunt)
     {
         this.lierEmpruntLecteur(emprunt);
+    }
+    
+    public void retirerEmpruntLecteur(Emprunt emprunt)
+    {
+        for(Emprunt em : this.emprunts)
+        {
+            if(em == emprunt)
+            {
+                em = null;
+            }
+        }
     }
 }

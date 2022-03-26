@@ -11,18 +11,20 @@ import java.time.LocalDate;
  *
  * @author krebst
  */
-public class Exemplaire implements Serializable {
+public class Exemplaire implements Comparable<Exemplaire>, Serializable {
     private static final long serialVersionUID = 1L;
     private int nExemplaire;
     private LocalDate dateDeReception;
     private boolean empruntable;
     private Emprunt emprunt;
+    private Ouvrage ouvrage;
     
-    public Exemplaire (int nExemplaire, LocalDate dateDeReception,boolean empruntable ) {
+    public Exemplaire (Ouvrage ouvrage, int nExemplaire, LocalDate dateDeReception,boolean empruntable) {
         this.nExemplaire = nExemplaire;
         this.dateDeReception = dateDeReception;
         this.empruntable = empruntable;
         this.emprunt = null;
+        this.ouvrage = null;
     }
 
     public int getNumero(){
@@ -49,6 +51,11 @@ public class Exemplaire implements Serializable {
         }
     }
     
+    public Ouvrage getOuvrage()
+    {
+        return this.ouvrage;
+    }
+    
     public void lierEmpruntExemplaire(Emprunt emprunt)
     {
         this.emprunt = emprunt;
@@ -57,5 +64,22 @@ public class Exemplaire implements Serializable {
     public void ajouterEmpruntExemplaire(Emprunt emprunt)
     {
         this.lierEmpruntExemplaire(emprunt);
+    }
+    
+    public void retirerEmpruntExemplaire(Emprunt emprunt)
+    {
+        this.emprunt = null;
+    }
+
+    @Override
+    public int compareTo(Exemplaire o) {
+        if(this.ouvrage.getISBN() == o.getOuvrage().getISBN() && this.nExemplaire == o.nExemplaire)
+        {
+            return 0;
+        }
+        else
+        {
+            return 1;
+        }
     }
 }

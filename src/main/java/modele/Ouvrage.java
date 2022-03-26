@@ -96,7 +96,7 @@ public class Ouvrage implements Serializable{
     {
         Exemplaire e;
         this.incrementNumDerEx();
-        e= new Exemplaire(this.getNumDerEx(), infosExemplaire.dateReception, infosExemplaire.empruntable);
+        e= new Exemplaire(this, this.getNumDerEx(), infosExemplaire.dateReception, infosExemplaire.empruntable);
         
         this.lierExemplaire(e);
     }
