@@ -203,7 +203,9 @@ public class Bibliotheque implements Serializable {
                             
                             else
                             {
-                                Emprunt em = new Emprunt(e,l);
+                                LocalDate dateDebut = ihm.saisirDateEmprunt();
+                                
+                                Emprunt em = new Emprunt(dateDebut, e,l);
                                 this.lierEmprunt(em);
                                 
                                 ihm.informerUtilisateur("Emprunt créé", true);
