@@ -72,6 +72,10 @@ private void gererDialogue(Commande cmd) {
         case AFFICHER_EXEMPLAIRE:
             bibliotheque.consulterExemplaireOuvrage(this);
             break;
+        case EMPRUNTER_EXEMPLAIRE:
+            bibliotheque.emprunterExemplaire(this);
+        case RENDRE_EXEMPLAIRE:
+            bibliotheque.rendreExemplaire(this);
         default:
             assert false : "Commande inconnue.";
     }
@@ -108,27 +112,7 @@ public void informerUtilisateur(String message, Boolean valide)
     ES.afficherLibelle(message + " : " + (valide ? "[OK]" : "[KO]"));
 }
 
-public boolean existeISBN(ArrayList<String> numsISBN, String numISBN){
-  
-    for (String s: numsISBN){
-       
-        if (s.equals(numISBN)){
-               return true;    
-        }
-    }
-    return false;
-}
 
-public boolean existeLecteur(ArrayList<Integer> numsLecteur, int numLecteur){
-  
-    for (int s: numsLecteur){
-       
-        if (s == numLecteur){
-               return true;    
-        }
-    }
-    return false;
-}
 
 //Utiliser sc.nextInt au lieu de sc.nextLine
 public String saisirISBNnonExiste(ArrayList<String> numsISBN){
@@ -136,7 +120,7 @@ public String saisirISBNnonExiste(ArrayList<String> numsISBN){
     String nISBN = ES.lireChaine();
     boolean test = true;
     
-    while(test == true && existeISBN(numsISBN,nISBN)){
+    while(test == true && ES.existeString(numsISBN,nISBN)){
         test = ES.lireBoolean("Le n° existe déjà, voulez-vous réessayer ?");
         
         if(test == true)
@@ -157,7 +141,7 @@ public String saisirISBNExiste(ArrayList<String> numsISBN){
     String nISBN = ES.lireChaine();
     boolean test = true;
     
-    while(test == true && !existeISBN(numsISBN,nISBN)){
+    while(test == true && !ES.existeString(numsISBN,nISBN)){
         test = ES.lireBoolean("Le n° n'existe pas, voulez-vous réessayer ?");
         
         if(test == true)
@@ -173,12 +157,34 @@ public String saisirISBNExiste(ArrayList<String> numsISBN){
    return nISBN;
 }
 
+public int saisirExemplaireExiste(ArrayList<Integer> numsExemplaires)
+{
+    ES.afficherLibelle("Entrez le Numéro de l'exemplaire:");
+    int nExemplaire = ES.lireEntier();
+    boolean test = true;
+    
+    while(test == true && !ES.existeInteger(numsExemplaires,nExemplaire)){
+        test = ES.lireBoolean("Le n° n'existe pas, voulez-vous réessayer ?");
+        
+        if(test == true)
+        {
+            ES.afficherLibelle("Entrez un nouveau numéro d'exemplaire:");
+            nExemplaire = ES.lireEntier();
+        }
+        else
+        {
+            nExemplaire = 0;
+        }
+   }
+   return nExemplaire;
+}
+
 public int saisirLecteurExiste(ArrayList<Integer> numsLecteur){
-    ES.afficherLibelle("Entrez le Numéro de lecteur:");
+    ES.afficherLibelle("Entrez le Numéro du lecteur :");
     int nLecteur = ES.lireEntier();
     boolean test = true;
     
-    while(test == true && !existeLecteur(numsLecteur,nLecteur)){
+    while(test == true && !ES.existeInteger(numsLecteur,nLecteur)){
         test = ES.lireBoolean("Le n° n'existe pas, voulez-vous réessayer ?");
         
         if(test == true)
