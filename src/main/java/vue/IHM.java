@@ -325,18 +325,6 @@ public InfosLecteur saisirLecteur(int nLecteur)
     return infosLecteur;
 }
 
-public LocalDate saisirDateEmprunt()
-{
-    LocalDate dateDebut = ES.lireDate("Date de début de l'emprunt : ");
-    
-    while(dateDebut.isBefore(now()))
-    {
-        dateDebut = ES.lireDate("-- La date de l'emprunt doit être égale ou postérieure à la date du jour.\n Veuillez entrer une nouvelle date");
-    }
-    
-    return dateDebut;
-}
-
 public static class InfosOuvrage {
     public final String titre;
     public final LocalDate dateParution;
