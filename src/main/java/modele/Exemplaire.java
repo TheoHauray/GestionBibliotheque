@@ -39,7 +39,7 @@ public class Exemplaire implements Comparable<Exemplaire>, Serializable {
         return empruntable;
     }
     
-    public boolean getEmpruntEnCours()
+    public boolean empruntEnCours()
     {
         if(this.emprunt == null)
         {
@@ -49,6 +49,11 @@ public class Exemplaire implements Comparable<Exemplaire>, Serializable {
         {
             return true;
         }
+    }
+    
+    public Emprunt getEmprunt()
+    {
+        return this.emprunt;
     }
     
     public Ouvrage getOuvrage()

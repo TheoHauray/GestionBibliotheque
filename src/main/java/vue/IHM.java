@@ -105,8 +105,8 @@ public void afficherExemplaire(int numero, LocalDate dateDeReception, boolean em
 
 public void afficheOuvrage(String nISBN, String titre, ArrayList<String> nomAuteurs, String nomEditeur, LocalDate dateParution){
     ES.afficherTexte("Informations de l'ouvrage : ");
-    ES.afficherISBN(nISBN);
     ES.afficherTitre(titre);
+    ES.afficherISBN(nISBN);
     ES.afficherAuteurs(nomAuteurs);
     ES.afficherEditeur(nomEditeur);
     ES.afficherDate("Date de parution", dateParution);
@@ -122,8 +122,8 @@ public void afficherLecteurEmprunt(String nom,String prenom,int numero)
 
 public void afficheEmpruntExemplaire(String titre,String nISBN,int nExemplaire,LocalDate dateDebut,LocalDate dateFin)
 {
-    ES.afficherISBN(nISBN);
     ES.afficherTitre(titre);
+    ES.afficherISBN(nISBN);
     ES.afficherNumero(nExemplaire);
     ES.afficherDate("Date début : ", dateDebut);
     ES.afficherDate("Date fin : ", dateDebut);

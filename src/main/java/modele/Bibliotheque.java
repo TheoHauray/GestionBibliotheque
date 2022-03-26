@@ -146,6 +146,18 @@ public class Bibliotheque implements Serializable {
                 for(Exemplaire e : o.getExemplaires())
                 {
                     ihm.afficherExemplaire(e.getNumero(), e.getDateDeReception(), e.getEmpruntable());
+                    
+                    if(e.empruntEnCours() == true)
+                    {
+                        Emprunt em = e.getEmprunt();
+                        Lecteur l = em.getLecteur();
+                        
+                        int numero = l.getNumero();
+                        String prenom = l.getPrenom();
+                        String nom = l.getNom();
+                        
+                        ihm.afficherLecteurEmprunt(nom, prenom, numero);
+                    }
                 }
             }
         }
@@ -180,7 +192,7 @@ public class Bibliotheque implements Serializable {
                                 ihm.informerUtilisateur("L'exemplaire n'est pas empruntable", false);
                             }
                             
-                            else if(e.getEmpruntEnCours() == true)
+                            else if(e.empruntEnCours() == true)
                             {
                                 ihm.informerUtilisateur("L'exemplaire est déjà emprunté", false);
                             }
@@ -231,6 +243,7 @@ public class Bibliotheque implements Serializable {
                             {
                                 em.supprimerEmprunt();
                                 this.retirerEmpruntBibliotheque(em);
+                                System.gc();
                                 ihm.informerUtilisateur("Emprunt retiré", true);
                             }
                         }
@@ -254,7 +267,7 @@ public class Bibliotheque implements Serializable {
             
             ArrayList<Emprunt> emprunts = l.getEmprunts();
             
-            if(emprunts != null)
+            if(emprunts.size() > 0)
             {
                 for(Emprunt emprunt : emprunts)
                 {
@@ -313,11 +326,11 @@ public class Bibliotheque implements Serializable {
     
     public void retirerEmpruntBibliotheque(Emprunt emprunt)
     {
-        for(Emprunt em : this.emprunts)
+        for(int i = 0; i < this.emprunts.size(); i++)
         {
-            if(em == emprunt)
+            if(this.emprunts.get(i).compareTo(emprunt) == 0)
             {
-                em = null;
+                this.emprunts.remove(this.emprunts.get(i));
             }
         }
     }

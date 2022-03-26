@@ -135,11 +135,11 @@ public class Lecteur implements Serializable{
     
     public void retirerEmpruntLecteur(Emprunt emprunt)
     {
-        for(Emprunt em : this.emprunts)
+        for(int i = 0; i < this.emprunts.size(); i++)
         {
-            if(em.compareTo(emprunt) == 0)
+            if(this.emprunts.get(i).compareTo(emprunt) == 0)
             {
-                em = null;
+                this.emprunts.remove(this.emprunts.get(i));
             }
         }
     }
