@@ -20,7 +20,8 @@ public class Emprunt implements Comparable<Emprunt>{
     public Emprunt(Exemplaire exemplaire, Lecteur lecteur)
     {
         this.dateDebut = LocalDate.now();
-        this.dateFin = LocalDate.now().plusDays(15);
+        this.dateFin = LocalDate.now();
+        this.dateDebut = this.dateFin.plusDays(15);
         this.lecteur = lecteur;
         this.exemplaire = exemplaire;
         
