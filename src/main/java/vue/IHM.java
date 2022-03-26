@@ -127,7 +127,7 @@ public void afficheEmpruntExemplaire(String titre,String nISBN,int nExemplaire,L
     ES.afficherISBN(nISBN);
     ES.afficherNumero(nExemplaire);
     ES.afficherDate("Date début : ", dateDebut);
-    ES.afficherDate("Date fin : ", dateDebut);
+    ES.afficherDate("Date fin : ", dateFin);
 }
 
 public void informerUtilisateur(String message, Boolean valide)
