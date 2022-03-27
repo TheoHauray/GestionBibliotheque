@@ -19,7 +19,8 @@ CREER_EXEMPLAIRE (5, "Créer un nouvel exemplaire"),
 AFFICHER_EXEMPLAIRE (6,"Afficher les exemplaires d'un ouvrage"),
 EMPRUNTER_EXEMPLAIRE (7, "Emprunter un exemplaire"),
 RENDRE_EXEMPLAIRE (8, "Rendre un exemplaire"),
-CONSULTER_EMPRUNT_LECTEUR(9, "Consulter les emprunts d'un lecteur");
+CONSULTER_EMPRUNT_LECTEUR(9, "Consulter les emprunts d'un lecteur"),
+RELANCER_LECTEUR(10,"Afficher les emprunts en retard");
 
 
 private final int code;

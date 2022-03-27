@@ -262,6 +262,7 @@ public class Bibliotheque implements Serializable {
             if (emprunt.enRetard() == true) {
                 Exemplaire e = emprunt.getExemplaire();
                 Ouvrage o = e.getOuvrage();
+                Lecteur l = emprunt.getLecteur();
 
                 int nExemplaire = e.getNumero();
                 String titre = o.getTitre();
@@ -269,6 +270,11 @@ public class Bibliotheque implements Serializable {
                 LocalDate dateDebut = emprunt.getDateDebut();
                 LocalDate dateFin = emprunt.getDateFin();
                 
+                int numero = l.getNumero();
+                String nom = l.getNom();
+                String prenom = l.getPrenom();
+
+                ihm.afficherLecteurEmprunt(nom, prenom, numero);
                 ihm.afficheEmpruntExemplaire(titre, nISBN, nExemplaire, dateDebut, dateFin);
             }
         } 

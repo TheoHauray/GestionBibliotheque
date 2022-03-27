@@ -81,6 +81,9 @@ private void gererDialogue(Commande cmd) {
         case CONSULTER_EMPRUNT_LECTEUR:
             bibliotheque.consulterEmpruntsLecteur(this);
             break;
+        case RELANCER_LECTEUR:
+            bibliotheque.relancerLecteur(this);
+            break;
         default:
             assert false : "Commande inconnue.";
     }
