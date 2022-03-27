@@ -48,12 +48,12 @@ public static Boolean lireBoolean(String libelle){
     System.out.println(libelle);
     int test = 2;
     
-    ES.afficherLibelle("Saisir 1 pour oui, 0 pour non");
+    ES.afficherLibelle("-- Saisir 1 pour oui, 0 pour non");
     test = ES.lireEntier();
     
     while(test != 1 && test != 0)
     {
-        ES.afficherLibelle("! Saisir 1 ou 0 !");
+        ES.afficherLibelle("Saisir 1 ou 0\n- Entrer un numéro : ");
         test = ES.lireEntier();
     }
     
@@ -205,7 +205,7 @@ do {
      date = LocalDate.parse(dateSaisie);
      OK = true;
     } catch (DateTimeParseException ignored) {
-        {System.out.println ("La date saisie n'est pas valide, Recommencez au format YYYY-MM-JJ");}
+        {System.out.println ("La date saisie n'est pas valide\n- Recommencez au format YYYY-MM-JJ : ");}
 }        
 }while (!OK);
 return date;

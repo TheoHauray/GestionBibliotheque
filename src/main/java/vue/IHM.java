@@ -132,7 +132,7 @@ public void afficheEmpruntExemplaire(String titre,String nISBN,int nExemplaire,L
 
 public void informerUtilisateur(String message, Boolean valide)
 {
-    ES.afficherLibelle(message + " : " + (valide ? "[OK]" : "[KO]"));
+    ES.afficherAction(message + " : " + (valide ? "[OK]" : "[KO]"));
 }
 
 
@@ -165,7 +165,7 @@ public String saisirISBNExiste(ArrayList<String> numsISBN){
     boolean test = true;
     
     while(test == true && !ES.existeString(numsISBN,nISBN)){
-        test = ES.lireBoolean("Le n n'existe pas, voulez-vous réessayer ?");
+        test = ES.lireBoolean("Le numéro n'existe pas, voulez-vous réessayer ?");
         
         if(test == true)
         {
@@ -237,7 +237,7 @@ public InfosOuvrage saisirOuvrage()
 
     while(dateParution.isAfter(now()))
     {
-        dateParution = ES.lireDate("La date de parution doit être antérieur à la date du jour.\nEntrer une nouvelle date : ");
+        dateParution = ES.lireDate("La date de parution doit être antérieur à la date du jour.\n- Entrer une nouvelle date : ");
     }
     nomEditeur = ES.lireChaine("- Nom de l'éditeur : ");
     
@@ -255,7 +255,7 @@ public InfosOuvrage saisirOuvrage()
         nPublic = sc.nextInt(); 
         if(nPublic != 1 && nPublic != 2 && nPublic != 3)
         {
-            ES.afficherLibelle("Le numéro doit être 1, 2 ou 3.\nEntrer un nouveau numéro : ");
+            ES.afficherLibelle("Le numéro doit être 1, 2 ou 3.\n- Entrer un nouveau numéro : ");
         }
         else 
         {
@@ -291,7 +291,7 @@ public InfosExemplaire saisirExemplaire(LocalDate dateParution)
     
     while(dateReception.isBefore(dateParution) || dateReception.isAfter(now()))
     {
-        dateReception = ES.lireDate("La date de réception doit être postérieure à la date de parution.\n Veuillez entrer une nouvelle date");
+        dateReception = ES.lireDate("La date de réception doit être postérieure à la date de parution.\n- Veuillez entrer une nouvelle date : ");
     }
     
     empruntable = ES.lireBoolean("L'exemplaire est-il empruntable ?");
@@ -305,7 +305,7 @@ public InfosLecteur saisirLecteur(int nLecteur)
     String nom, prenom, adresse, email;
     LocalDate dateDeNaissance;
 
-    ES.afficherTitre("Saisir les informations du lecteur");
+    ES.afficherAction("Saisir les informations du lecteur");
     nom = ES.lireChaine("- Nom : ");
     prenom = ES.lireChaine("- Prenom : ");
     adresse = ES.lireChaine("- Adresse : ");
@@ -315,12 +315,25 @@ public InfosLecteur saisirLecteur(int nLecteur)
     
     while(dateDeNaissance.isAfter(now()))
     {
-        dateDeNaissance = ES.lireDate("La date de naissance doit être antérieure à la date du jour.\nEntrer une nouvelle date : ");
+        dateDeNaissance = ES.lireDate("La date de naissance doit être antérieure à la date du jour.\n- Entrer une nouvelle date : ");
     }
     
     InfosLecteur infosLecteur = new InfosLecteur(nom, prenom, dateDeNaissance, adresse, email);
     
     return infosLecteur;
+}
+
+public LocalDate saisirDateEmprunt()
+{
+    ES.afficherAction("Date emprunt");
+    LocalDate dateDebut = ES.lireDate("- Saisir la date du début de l'emprunt : ");
+    
+    while(dateDebut.isAfter(now()))
+    {
+        dateDebut = ES.lireDate("La date doit être antérieure ou égale à la date du jour.\n- Entrer une nouvelle date : ");
+    }
+    
+    return dateDebut;
 }
 
 public static class InfosOuvrage {

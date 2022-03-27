@@ -17,24 +17,15 @@ public class Emprunt implements Comparable<Emprunt>{
     private Lecteur lecteur;
     private Exemplaire exemplaire;
     
-    public Emprunt(Exemplaire exemplaire, Lecteur lecteur)
+    public Emprunt(LocalDate dateDebut, Exemplaire exemplaire, Lecteur lecteur)
     {
-        this.dateDebut = LocalDate.now();
+        this.dateDebut = dateDebut;
         this.dateFin = this.dateDebut.plusDays(15);
         this.lecteur = lecteur;
         this.exemplaire = exemplaire;
         
         exemplaire.ajouterEmpruntExemplaire(this);
         lecteur.ajouterEmpruntLecteur(this);
-    }
-    
-    public Emprunt creerEmprunt(Lecteur lecteur, Exemplaire exemplaire)
-    {
-        Emprunt em = new Emprunt(exemplaire, lecteur);
-        
-        exemplaire.lierEmpruntExemplaire(em);
-        
-        return em;
     }
     
     public Exemplaire getExemplaire()
