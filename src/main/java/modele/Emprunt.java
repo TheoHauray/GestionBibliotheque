@@ -53,6 +53,10 @@ public class Emprunt implements Comparable<Emprunt>{
         this.exemplaire.retirerEmpruntExemplaire(this);
         this.lecteur.retirerEmpruntLecteur(this);
     }
+    
+    public boolean enRetard() {
+        return this.dateFin.isBefore(LocalDate.now());
+    }
 
     @Override
     public int compareTo(Emprunt o) {
