@@ -4,6 +4,7 @@
  */
 package modele;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -11,7 +12,8 @@ import java.util.Date;
  *
  * @author hauraytheo
  */
-public class Emprunt implements Comparable<Emprunt>{
+public class Emprunt implements Comparable<Emprunt>, Serializable{
+    private static final long serialVersionUID = 1L;
     private LocalDate dateDebut;
     private LocalDate dateFin;
     private Lecteur lecteur;
