@@ -79,7 +79,7 @@ public class Lecteur implements Serializable{
         return false;
     }
     
-    public Emprunt getEmprunt(Ouvrage ouvrage, int nExemplaire)
+    public Emprunt unEmprunt(Ouvrage ouvrage, int nExemplaire)
     {
         Emprunt em = null;
         

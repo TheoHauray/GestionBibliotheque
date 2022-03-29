@@ -243,7 +243,7 @@ public class Bibliotheque implements Serializable {
 
                         if(nExemplaire != 0)
                         {
-                            Emprunt em = l.getEmprunt(o, nExemplaire);
+                            Emprunt em = l.unEmprunt(o, nExemplaire);
                             
                             if(em != null)
                             {
